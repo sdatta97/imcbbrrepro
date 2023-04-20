@@ -8,9 +8,12 @@ rtt_list = 5 10 25 50 75 100 150 200
 bandwidth_list = 10 20 50 100 250 500 750 1000
 bufcap_list = 100 10000
 
-for bufcap in bufcap_list do
-    for bandwidth in bandwidth_list do
-        for rtt in rtt_list do
+for bufcap in bufcap_list 
+do
+    for bandwidth in bandwidth_list 
+    do
+        for rtt in rtt_list 
+        do
             ## ssh into router
             ssh -o StrictHostKeyChecking=no router << EOF
             ## Delete any existing queues
