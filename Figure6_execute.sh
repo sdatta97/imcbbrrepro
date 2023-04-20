@@ -4,9 +4,9 @@
 # sysctl -w net.core.wmem_default=2147483647
 # sysctl -w net.core.rmem_max=2147483647
 # sysctl -w net.core.wmem_max=2147483647
-rtt_list = 5 10 25 50 75 100 150 200
-bandwidth_list = 10 20 50 100 250 500 750 1000
-bufcap_list = 100 10000
+rtt_list = {5 10 25 50 75 100 150 200}
+bandwidth_list = {10 20 50 100 250 500 750 1000}
+bufcap_list = {100 10000}
 
 for bufcap in bufcap_list 
 do
