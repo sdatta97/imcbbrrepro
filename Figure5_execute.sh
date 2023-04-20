@@ -11,7 +11,7 @@ do
         for rtt in 5 10 25 50 75 100 150 200 
         do
             ## ssh into router
-            ssh -o -T StrictHostKeyChecking=no sdatta@c220g2-011129.wisc.cloudlab.us<< EOF
+            ssh -o StrictHostKeyChecking=no -T sdatta@c220g2-011129.wisc.cloudlab.us<< EOF
             ## Delete any existing queues
             sudo tc qdisc del dev $(ip route get 10.10.1.1 | grep -oP "(?<=dev )[^ ]+") root  
             ## Create an htb qdisc
@@ -40,7 +40,7 @@ do
             sudo tc qdisc change dev $(ip route get 10.10.3.1 | grep -oP "(?<=dev )[^ ]+") root netem delay "$rtt"
 EOF
             ##ssh into h3
-            ssh -o -T StrictHostKeyChecking=no sdatta@c220g2-011126.wisc.cloudlab.us<< EOF
+            ssh -o StrictHostKeyChecking=no -T sdatta@c220g2-011126.wisc.cloudlab.us<< EOF
             mkdir -p fig5 
             screen -S "$bufcap\_$bandwidth\_$rtt\_$delay"
             iperf3 -s -1 -D
