@@ -1,9 +1,12 @@
 #!/bin/bash
-##code runs on h1
+##code runs on router (tbf)
 # sysctl -w net.core.rmem_default=2147483647
 # sysctl -w net.core.wmem_default=2147483647
 # sysctl -w net.core.rmem_max=2147483647
 # sysctl -w net.core.wmem_max=2147483647
+
+ssh -o StrictHostKeyChecking=no -T root@h3 "mkdir -p fig5"
+ssh -o StrictHostKeyChecking=no -T root@h1 "mkdir -p fig5"
 for bufcap in 100 10000 
 do
     for bandwidth in 10 20 50 100 250 500 750 1000 
@@ -11,7 +14,7 @@ do
         for rtt in 5 10 25 50 75 100 150 200 
         do
             ## ssh into router
-            ssh -o StrictHostKeyChecking=no -T root@tbf<< EOF
+            ## ssh -o StrictHostKeyChecking=no -T root@tbf<< EOF
             ## Delete any existing queues
             sudo tc qdisc del dev $(ip route get 10.10.1.1 | grep -oP "(?<=dev )[^ ]+") root  
             ## Create an htb qdisc
@@ -38,16 +41,15 @@ do
             sudo tc qdisc add dev $(ip route get 10.10.3.1 | grep -oP "(?<=dev )[^ ]+") parent 1:3 bfifo limit "$bufcap"kbit
             ## Set up network delay 
             sudo tc qdisc change dev $(ip route get 10.10.3.1 | grep -oP "(?<=dev )[^ ]+") root netem delay "$rtt"
-EOF
+## EOF
             ##ssh into h3
-            ssh -o StrictHostKeyChecking=no -T root@h3<< EOF
-            mkdir -p fig5 
-            screen -S "$bufcap\_$bandwidth\_$rtt\_$delay"
-            iperf3 -s -1 -D
-            iperf3 -c -fk h3 -C cubic -t 10s | tee ./fig5/"$bufcap"_"$bandwidth"_"$rtt"_"$delay"_cubic.txt
-            iperf3 -s -1 -D
-            iperf3 -c -fk h3 -C bbr -t 10s | tee ./fig5/"$bufcap"_"$bandwidth"_"$rtt"_"$delay"_bbr.txt
-EOF
+            ## << EOF
+            ## screen -S "$bufcap\_$bandwidth\_$rtt\_$delay"
+            ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
+            ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c -fk h3 -C cubic -t 10s | tee ./fig5/"$bufcap"_"$bandwidth"_"$rtt"_"$delay"_cubic.txt"
+            ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
+            ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c -fk h3 -C bbr -t 10s | tee ./fig5/"$bufcap"_"$bandwidth"_"$rtt"_"$delay"_bbr.txt"
+## EOF
         done
     done
 done
