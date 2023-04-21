@@ -4,9 +4,8 @@
 # sysctl -w net.core.wmem_default=2147483647
 # sysctl -w net.core.rmem_max=2147483647
 # sysctl -w net.core.wmem_max=2147483647
-
-ssh -o StrictHostKeyChecking=no -T root@h3 "mkdir -p fig5"
-ssh -o StrictHostKeyChecking=no -T root@h1 "mkdir -p fig5"
+sudo ssh -o StrictHostKeyChecking=no -T root@h3 "mkdir -p fig5"
+sudo ssh -o StrictHostKeyChecking=no -T root@h1 "mkdir -p fig5"
 for bufcap in 100 10000 
 do
     for bandwidth in 10 20 50 100 250 500 750 1000 
@@ -45,10 +44,10 @@ do
             ##ssh into h3
             ## << EOF
             ## screen -S "$bufcap\_$bandwidth\_$rtt\_$delay"
-            ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
-            ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c -fk h3 -C cubic -t 10s | tee ./fig5/"$bufcap"_"$bandwidth"_"$rtt"_"$delay"_cubic.txt"
-            ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
-            ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c -fk h3 -C bbr -t 10s | tee ./fig5/"$bufcap"_"$bandwidth"_"$rtt"_"$delay"_bbr.txt"
+            sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
+            sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c -fk h3 -C cubic -t 10s | tee ./fig5/"$bufcap"_"$bandwidth"_"$rtt"_"$delay"_cubic.txt"
+            sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
+            sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c -fk h3 -C bbr -t 10s | tee ./fig5/"$bufcap"_"$bandwidth"_"$rtt"_"$delay"_bbr.txt"
 ## EOF
         done
     done
