@@ -31,14 +31,15 @@ do
             sudo tc qdisc add dev $(ip route get 10.10.3.1 | grep -oP "(?<=dev )[^ ]+") parent 1:3 bfifo limit "$bufcap"kbit
             ## Set up network delay 
             sudo tc qdisc replace dev $(ip route get 10.10.3.1 | grep -oP "(?<=dev )[^ ]+") root netem delay "$rtt"ms
+
             sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
-            sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C cubic -n 10mb -fk| tee ./fig6/"$bufcap"_"$bandwidth"_"$rtt"_"$delay"_cubic.txt"
+            sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C cubic -n 10mb -fk| tee ./fig6/"$bufcap"_"$bandwidth"_"$rtt"_cubic.txt"
             sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
-            sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C bbr -n 10mb -fk | tee ./fig6/"$bufcap"_"$bandwidth"_"$rtt"_"$delay"_bbr.txt"
+            sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C bbr -n 10mb -fk | tee ./fig6/"$bufcap"_"$bandwidth"_"$rtt"_bbr.txt"
             sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
-            sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C cubic -n 100mb -fk | tee ./fig6/"$bufcap"_"$bandwidth"_"$rtt"_"$delay"_cubic.txt"
+            sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C cubic -n 100mb -fk | tee ./fig6/"$bufcap"_"$bandwidth"_"$rtt"_cubic.txt"
             sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
-            sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C bbr -n 100mb -fk | tee ./fig6/"$bufcap"_"$bandwidth"_"$rtt"_"$delay"_bbr.txt"
+            sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C bbr -n 100mb -fk | tee ./fig6/"$bufcap"_"$bandwidth"_"$rtt"_bbr.txt"
         done
     done
 done
