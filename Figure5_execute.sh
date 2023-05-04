@@ -47,7 +47,7 @@ do
             sudo tc qdisc add dev $(ip route get 10.10.3.1 | grep -oP "(?<=dev )[^ ]+") parent 1:3 bfifo limit "$bufcap"kbit
             echo "Add h3 success"
             ## Set up network delay 
-            sudo tc qdisc change dev $(ip route get 10.10.3.1 | grep -oP "(?<=dev )[^ ]+") root netem delay "$rtt"
+            sudo tc qdisc change dev $(ip route get 10.10.3.1 | grep -oP "(?<=dev )[^ ]+") root netem delay "$rtt"ms
             echo "Add delay at h3 success"
 ## EOF
             ##ssh into h3
