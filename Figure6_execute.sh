@@ -33,13 +33,13 @@ do
             sudo tc qdisc replace dev $(ip route get 10.10.3.1 | grep -oP "(?<=dev )[^ ]+") root netem delay "$rtt"ms
 
             sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
-            sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C cubic -n 10mb -fk| tee ./fig6/"$bufcap"_"$bandwidth"_"$rtt"_cubic.txt"
+            sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C cubic -n 10mb -fk| tee ./fig6/"$bufcap"_"$bandwidth"_"$rtt"_cubic_10.txt"
             sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
-            sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C bbr -n 10mb -fk | tee ./fig6/"$bufcap"_"$bandwidth"_"$rtt"_bbr.txt"
+            sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C bbr -n 10mb -fk | tee ./fig6/"$bufcap"_"$bandwidth"_"$rtt"_bbr_10.txt"
             sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
-            sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C cubic -n 100mb -fk | tee ./fig6/"$bufcap"_"$bandwidth"_"$rtt"_cubic.txt"
+            sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C cubic -n 100mb -fk | tee ./fig6/"$bufcap"_"$bandwidth"_"$rtt"_cubic_100.txt"
             sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
-            sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C bbr -n 100mb -fk | tee ./fig6/"$bufcap"_"$bandwidth"_"$rtt"_bbr.txt"
+            sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C bbr -n 100mb -fk | tee ./fig6/"$bufcap"_"$bandwidth"_"$rtt"_bbr_100.txt"
         done
     done
 done
