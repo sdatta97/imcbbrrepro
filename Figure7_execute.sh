@@ -5,8 +5,8 @@
 # sysctl -w net.core.rmem_max=2147483647
 # sysctl -w net.core.wmem_max=2147483647
 
-sudo ssh -o StrictHostKeyChecking=no -T root@h3 "mkdir -p fig6"
-sudo ssh -o StrictHostKeyChecking=no -T root@h1 "mkdir -p fig6"
+sudo ssh -o StrictHostKeyChecking=no -T root@h3 "mkdir -p fig7"
+sudo ssh -o StrictHostKeyChecking=no -T root@h1 "mkdir -p fig7"
 bandwidth = 100;
 bufcap = 10000;
 rtt = 25;
@@ -33,7 +33,7 @@ for loss_pc in loss
     sudo tc qdisc replace dev $(ip route get 10.10.3.1 | grep -oP "(?<=dev )[^ ]+") root netem loss "$loss_pc"%
 
     sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
-    sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C cubic -n 100mb -fk | tee ./fig6/"$bufcap"_"$bandwidth"_"$rtt"_"$loss_pc"_cubic.txt"
+    sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C cubic -n 100mb -fk | tee ./fig7/"$bufcap"_"$bandwidth"_"$rtt"_"$loss_pc"_cubic.txt"
     sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
-    sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C bbr -n 100mb -fk | tee ./fig6/"$bufcap"_"$bandwidth"_"$rtt"_"$loss_pc"_bbr.txt"
+    sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C bbr -n 100mb -fk | tee ./fig7/"$bufcap"_"$bandwidth"_"$rtt"_"$loss_pc"_bbr.txt"
 done
