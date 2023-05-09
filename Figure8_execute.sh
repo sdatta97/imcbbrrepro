@@ -38,5 +38,6 @@ do
     
     sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
     nohup sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -p 5201 -C cubic -t 60s -fk| tee ./fig8/"$bufcap"_cubic.txt" &
-    sudo ssh -o StrictHostKeyChecking=no -T root@h2 "iperf3 -c h3 -p 5203 -C bbr -t 60s -fk | tee ./fig8/"$bufcap"_bbr.txt"
+    sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -p 5002 -1 -D"
+    sudo ssh -o StrictHostKeyChecking=no -T root@h2 "iperf3 -c h3 -p 5002 -C bbr -t 60s -fk | tee ./fig8/"$bufcap"_bbr.txt"
 done
