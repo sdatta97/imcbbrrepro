@@ -10,8 +10,8 @@ sudo ssh -o StrictHostKeyChecking=no -T root@h1 "mkdir -p fig7"
 bandwidth = 100;
 bufcap = 10000;
 rtt = 25;
-loss = 1 2 3 6 12 18 27 36 45;
-for loss_pc in loss
+for loss_pc in 1 2 3 6 12 18 27 36 45
+do
     ## Delete any existing queues
     sudo tc qdisc del dev $(ip route get 10.10.1.1 | grep -oP "(?<=dev )[^ ]+") root  
     ## Create an htb qdisc
