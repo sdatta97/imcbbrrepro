@@ -33,9 +33,9 @@ do
     sudo tc qdisc replace dev $(ip route get 10.10.3.1 | grep -oP "(?<=dev )[^ ]+") root netem loss $loss_pc%
 
     sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
-    sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C cubic -n 10mb -fk | tee ./fig7/"$loss_pc"_cubic.txt"
+    sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C cubic -t 60s -fk | tee ./fig7/"$loss_pc"_cubic.txt"
     sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
-    sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C bbr -n 10mb -fk | tee ./fig7/"$loss_pc"_bbr.txt"
+    sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C bbr -t 60s -fk | tee ./fig7/"$loss_pc"_bbr.txt"
     sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
-    sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C reno -n 10mb -fk | tee ./fig7/"$loss_pc"_reno.txt"
+    sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C reno -t 60s -fk | tee ./fig7/"$loss_pc"_reno.txt"
 done
