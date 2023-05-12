@@ -6,8 +6,9 @@ do
     do
         for rtt in 5 10 25 50 75 100 150 200 
         do
-            rg sender "$bufcap"_"$bandwidth"_"$rtt"_cubic.txt -A 0 | awk -v fname="$bufcap"_"$bandwidth"_"$rtt"_cubic.txt '{print fname"," $7}'  >> cubic.csv
-            rg sender "$bufcap"_"$bandwidth"_"$rtt"_bbr.txt -A 0 | awk '{print 1, $7}'  >> bbr.csv        
+            ## rg sender "$bufcap"_"$bandwidth"_"$rtt"_cubic.txt -A 0 | awk -v fname="$bufcap"_"$bandwidth"_"$rtt"_cubic.txt '{print fname"," $7}'  >> cubic.csv
+            rg sender "$bufcap"_"$bandwidth"_"$rtt"_cubic.txt -A 0 | awk '{print $7}'  >> cubic.csv      
+            rg sender "$bufcap"_"$bandwidth"_"$rtt"_bbr.txt -A 0 | awk '{print $7}'  >> bbr.csv        
         done
     done   
 done
