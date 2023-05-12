@@ -8,7 +8,9 @@ do
         do
             ## rg sender "$bufcap"_"$bandwidth"_"$rtt"_cubic.txt -A 0 | awk -v fname="$bufcap"_"$bandwidth"_"$rtt"_cubic.txt '{print fname"," $7}'  >> cubic.csv
             rg sender "$bufcap"_"$bandwidth"_"$rtt"_cubic.txt -A 0 | awk '{print $7}'  >> cubic.csv      
-            rg sender "$bufcap"_"$bandwidth"_"$rtt"_bbr.txt -A 0 | awk '{print $7}'  >> bbr.csv        
+            rg sender "$bufcap"_"$bandwidth"_"$rtt"_bbr.txt -A 0 | awk '{print $7}'  >> bbr.csv 
+            rg sender "$bufcap"_"$bandwidth"_"$rtt"_cubic.txt -A 0 | awk '{print $9}'  >> cubic_retr.csv      
+            rg sender "$bufcap"_"$bandwidth"_"$rtt"_bbr.txt -A 0 | awk '{print $9}'  >> bbr_retr.csv        
         done
     done   
 done
