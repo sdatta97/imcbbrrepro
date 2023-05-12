@@ -50,27 +50,27 @@ for i in range(int(arr_length/2)):
     retr_cubic [bandwidth_idx, rtt_idx] = val_arr[i]
 print(retr_cubic)
 
+gpgain_100kb = np.ones((8,8))
 gpgain_10mb = np.ones((8,8))
-gpgain_100mb = np.ones((8,8))
 for bandwidth_idx in range(8):
     for rtt_idx in range(8):
-        gpgain_10mb[bandwidth_idx,rtt_idx] = np.divide((goodput_bbr[0,bandwidth_idx,rtt_idx] - goodput_cubic[0,bandwidth_idx,rtt_idx]), goodput_cubic[0,bandwidth_idx,rtt_idx])
-        gpgain_100mb[bandwidth_idx,rtt_idx]  = np.divide((goodput_bbr[1,bandwidth_idx,rtt_idx] - goodput_cubic[1,bandwidth_idx,rtt_idx]), goodput_cubic[1,bandwidth_idx,rtt_idx])
+        gpgain_100kb[bandwidth_idx,rtt_idx] = np.divide((goodput_bbr[0,bandwidth_idx,rtt_idx] - goodput_cubic[0,bandwidth_idx,rtt_idx]), goodput_cubic[0,bandwidth_idx,rtt_idx])
+        gpgain_10mb[bandwidth_idx,rtt_idx]  = np.divide((goodput_bbr[1,bandwidth_idx,rtt_idx] - goodput_cubic[1,bandwidth_idx,rtt_idx]), goodput_cubic[1,bandwidth_idx,rtt_idx])
+print(gpgain_100kb)
+fig, ax = plt.subplots()
+im = ax.imshow(gpgain_100kb)
+for i in range(8):
+    for j in range(8):
+        text = ax.text(j, i, format(gpgain_100kb[i, j],'.2f'), ha="center", va="center", color="w")
+fig.tight_layout()
+plt.show()
+
 print(gpgain_10mb)
 fig, ax = plt.subplots()
 im = ax.imshow(gpgain_10mb)
 for i in range(8):
     for j in range(8):
         text = ax.text(j, i, format(gpgain_10mb[i, j],'.2f'), ha="center", va="center", color="w")
-fig.tight_layout()
-plt.show()
-
-print(gpgain_100mb)
-fig, ax = plt.subplots()
-im = ax.imshow(gpgain_100mb)
-for i in range(8):
-    for j in range(8):
-        text = ax.text(j, i, format(gpgain_100mb[i, j],'.2f'), ha="center", va="center", color="w")
 fig.tight_layout()
 plt.show()
 
