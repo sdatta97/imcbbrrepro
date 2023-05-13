@@ -34,16 +34,12 @@ do
                 ## Set up queue limit
                 sudo tc qdisc add dev $(ip route get 10.10.3.1 | grep -oP "(?<=dev )[^ ]+") parent 1:3 bfifo limit "$bufcap"kb
             
-                sleep 10
                 sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
                 sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C cubic -n 10mb -fk| tee ./fig6/"$bufcap"_"$bandwidth"_"$rtt"_"$trial"_cubic_10.txt"
-                sleep 10
                 sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
                 sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C bbr -n 10mb -fk | tee ./fig6/"$bufcap"_"$bandwidth"_"$rtt"__"$trial"_bbr_10.txt"
-                sleep 10
                 sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
                 sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C cubic -n 100mb -fk | tee ./fig6/"$bufcap"_"$bandwidth"_"$rtt"_"$trial"_cubic_100.txt"
-                sleep 10
                 sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
                 sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C bbr -n 100mb -fk | tee ./fig6/"$bufcap"_"$bandwidth"_"$rtt"_"$trial"_bbr_100.txt"
             done
