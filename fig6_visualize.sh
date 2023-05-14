@@ -6,10 +6,13 @@ do
     do
         for rtt in 5 10 25 50 75 100 150 200 
         do
-            rg sender "$bufcap"_"$bandwidth"_"$rtt"_cubic_10.txt -A 0 | awk '{print $3}' | cut -d "-" -f 2 >> cubic_10mb.csv
-            rg sender "$bufcap"_"$bandwidth"_"$rtt"_bbr_10.txt -A 0 | awk '{print $3}' | cut -d "-" -f 2 >> bbr_10mb.csv         
-            rg sender "$bufcap"_"$bandwidth"_"$rtt"_cubic_100.txt -A 0 | awk '{print $3}' | cut -d "-" -f 2 >> cubic_100mb.csv
-            rg sender "$bufcap"_"$bandwidth"_"$rtt"_bbr_100.txt -A 0 | awk '{print $3}'  | cut -d "-" -f 2 >> bbr_100mb.csv      
+            for trial in 1
+            do 
+                rg sender "$bufcap"_"$bandwidth"_"$rtt"_"$trial"_cubic_10.txt -A 0 | awk '{print $3}' | cut -d "-" -f 2 >> cubic_10mb.csv
+                rg sender "$bufcap"_"$bandwidth"_"$rtt"_"$trial"_bbr_10.txt -A 0 | awk '{print $3}' | cut -d "-" -f 2 >> bbr_10mb.csv         
+                rg sender "$bufcap"_"$bandwidth"_"$rtt"_"$trial"_cubic_100.txt -A 0 | awk '{print $3}' | cut -d "-" -f 2 >> cubic_100mb.csv
+                rg sender "$bufcap"_"$bandwidth"_"$rtt"_"$trial"_bbr_100.txt -A 0 | awk '{print $3}'  | cut -d "-" -f 2 >> bbr_100mb.csv    
+            done  
         done
     done
 done
