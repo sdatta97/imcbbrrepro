@@ -37,7 +37,7 @@ do
                 sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
                 sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C cubic -n 10mb -fk| tee ./fig6/"$bufcap"_"$bandwidth"_"$rtt"_"$trial"_cubic_10.txt"
                 sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
-                sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C bbr -n 10mb -fk | tee ./fig6/"$bufcap"_"$bandwidth"_"$rtt"__"$trial"_bbr_10.txt"
+                sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C bbr -n 10mb -fk | tee ./fig6/"$bufcap"_"$bandwidth"_"$rtt"_"$trial"_bbr_10.txt"
                 sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
                 sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C cubic -n 100mb -fk | tee ./fig6/"$bufcap"_"$bandwidth"_"$rtt"_"$trial"_cubic_100.txt"
                 sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
