@@ -35,13 +35,8 @@ for i in range(int(arr_length)):
 ## print(retr_cubic)
 
 loss = ["0","1","2","3","6","12","18","27","36","45","50"] 
-fig, (ax1 ,ax2) = plt.subplots()
 # Show all ticks and label them with the respective list entries
-ax1.set_xticks(np.arange(11), labels=loss)
-im = ax1.imshow(goodput_bbr)
-ax2.set_xticks(np.arange(11), labels=loss)
-im = ax2.imshow(goodput_cubic)
-fig.tight_layout()
+plt.plot(np.arange(11))
 plt.xlabel("Loss (in %)")
 plt.ylabel("Goodput (in mbps)")
 plt.show()
