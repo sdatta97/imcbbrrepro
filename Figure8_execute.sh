@@ -32,15 +32,15 @@ do
         ## Create an htb qdisc
         sudo tc qdisc replace dev $(ip route get 10.10.3.1 | grep -oP "(?<=dev )[^ ]+") root handle 1: htb default 3
         ## Limit the queue traffic to the bandwidth
-        sudo tc class add dev $(ip route get 10.10.3.1 | grep -oP "(?<=dev )[^ ]+") parent 1: classid 1:3 htb rate 1gbps
+        sudo tc class add dev $(ip route get 10.10.3.1 | grep -oP "(?<=dev )[^ ]+") parent 1: classid 1:3 htb rate 1gbit
         ## Set up queue limit
         sudo tc qdisc add dev $(ip route get 10.10.3.1 | grep -oP "(?<=dev )[^ ]+") parent 1:3 bfifo limit "$bufcap"kb
         ## Set up network delay 
         sudo tc qdisc replace dev $(ip route get 10.10.3.1 | grep -oP "(?<=dev )[^ ]+") root netem delay 20ms
-        
+        sleep 10
         sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
-        sudo ssh -o StrictHostKeyChecking=no -T root@h1 "nohup iperf3 -c h3 -p 5201 -C cubic -t 60s -fk| tee ./fig8/"$bufcap"_"$trial"_cubic.txt &"
+        sudo ssh -o StrictHostKeyChecking=no -T root@h1 "nohup iperf3 -c h3 -p 5201 -C cubic -t 60s -fk >./fig8/"$bufcap"_"$trial"_cubic.txt 2>/dev/null &"
         sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -p 5002 -1 -D"
-        sudo ssh -o StrictHostKeyChecking=no -T root@h2 "iperf3 -c h3 -p 5002 -C bbr -t 60s -fk | tee ./fig8/"$bufcap"_"$trial"_bbr.txt"
+        sudo ssh -o StrictHostKeyChecking=no -T root@h2 "iperf3 -c h3 -p 5002 -C bbr -t 60s -fk > ./fig8/"$bufcap"_"$trial"_bbr.txt"
     done
 done
