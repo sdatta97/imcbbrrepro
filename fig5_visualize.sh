@@ -1,5 +1,10 @@
 #!/bin/bash
 rm -rf *.csv
+echo "Goodput" >> cubic.csv
+echo "Goodput" >> bbr.csv
+echo "Retransmissions" >> cubic_retr.csv
+echo "Retransmissions" >> bbr_retr.csv
+
 for bufcap in 100 10000 
 do
     for bandwidth in 10 20 50 100 250 500 750 1000 
