@@ -36,7 +36,7 @@ for i in range(int(arr_length/2)):
     rtt_idx = int(np.remainder(np.remainder(i, 64),8))
     print(bufcap_idx , bandwidth_idx , rtt_idx)
     retr_bbr [bandwidth_idx, rtt_idx] = val_arr[i]
-print(retr_bbr)
+## print(retr_bbr)
 
 # reading the CSV file
 val_arr = np.array(pd.read_csv('cubic_retr.csv'))
@@ -48,7 +48,7 @@ for i in range(int(arr_length/2)):
     rtt_idx = int(np.remainder(np.remainder(i, 64),8))
     print(bufcap_idx , bandwidth_idx , rtt_idx)
     retr_cubic [bandwidth_idx, rtt_idx] = val_arr[i]
-print(retr_cubic)
+## print(retr_cubic)
 
 gpgain_100kb = np.ones((8,8))
 gpgain_10mb = np.ones((8,8))
