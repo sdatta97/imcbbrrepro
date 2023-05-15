@@ -1,9 +1,9 @@
 #!/bin/bash
 rm -rf *.csv
-touch bbr_goodput.csv
-touch cubic_goodput.csv
-touch bbr_retr.csv
-touch cubic_retr.csv
+echo "Goodput" >> bbr_goodput.csv
+echo "Goodput" >> cubic_goodput.csv
+echo "Retransmissions" >> bbr_retr.csv
+echo "Retransmissions" >> cubic_retr.csv
 for loss_pc in 0 1 2 3 6 12 18 27 36 45 50
 do
     for trial in 1
