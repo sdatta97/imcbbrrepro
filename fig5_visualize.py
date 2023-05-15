@@ -35,7 +35,7 @@ for i in range(int(arr_length/2)):
     bandwidth_idx = int(np.floor_divide(np.remainder(i, 64),8))
     rtt_idx = int(np.remainder(np.remainder(i, 64),8))
     print(bufcap_idx , bandwidth_idx , rtt_idx)
-    retr_bbr [bandwidth_idx, rtt_idx] = val_arr[i]
+    retr_bbr [7-bandwidth_idx, rtt_idx] = val_arr[i]
 ## print(retr_bbr)
 
 # reading the CSV file
@@ -47,25 +47,25 @@ for i in range(int(arr_length/2)):
     bandwidth_idx = int(np.floor_divide(np.remainder(i, 64),8))
     rtt_idx = int(np.remainder(np.remainder(i, 64),8))
     print(bufcap_idx , bandwidth_idx , rtt_idx)
-    retr_cubic [bandwidth_idx, rtt_idx] = val_arr[i]
+    retr_cubic [7-bandwidth_idx, rtt_idx] = val_arr[i]
 ## print(retr_cubic)
 
 gpgain_100kb = np.ones((8,8))
 gpgain_10mb = np.ones((8,8))
 for bandwidth_idx in range(8):
     for rtt_idx in range(8):
-        gpgain_100kb[bandwidth_idx,rtt_idx] = np.divide((goodput_bbr[0,bandwidth_idx,rtt_idx] - goodput_cubic[0,bandwidth_idx,rtt_idx]), goodput_cubic[0,bandwidth_idx,rtt_idx])
-        gpgain_10mb[bandwidth_idx,rtt_idx]  = np.divide((goodput_bbr[1,bandwidth_idx,rtt_idx] - goodput_cubic[1,bandwidth_idx,rtt_idx]), goodput_cubic[1,bandwidth_idx,rtt_idx])
+        gpgain_100kb[bandwidth_idx,rtt_idx] = np.divide((goodput_bbr[0,7-bandwidth_idx,rtt_idx] - goodput_cubic[0,7-bandwidth_idx,rtt_idx]), goodput_cubic[0,7-bandwidth_idx,rtt_idx])
+        gpgain_10mb[bandwidth_idx,rtt_idx]  = np.divide((goodput_bbr[1,7-bandwidth_idx,rtt_idx] - goodput_cubic[1,7-bandwidth_idx,rtt_idx]), goodput_cubic[1,7-bandwidth_idx,rtt_idx])
 
 RTT = ["5","10","25","50","75","100","150","200"]
-Bandwidth = ["10","20","50","100","250","500","750","1000"]
+Bandwidth = ["1000","750","500","250","100","50","20","10"]
 
 print(gpgain_100kb)
 fig, ax = plt.subplots()
-im = ax.imshow(gpgain_100kb)
 # Show all ticks and label them with the respective list entries
 ax.set_xticks(np.arange(8), labels=RTT)
 ax.set_yticks(np.arange(8), labels=Bandwidth)
+im = ax.imshow(gpgain_100kb)
 for i in range(8):
     for j in range(8):
         text = ax.text(i, j, format(gpgain_100kb[j, i],'.2f'), ha="center", va="center", color="w")
@@ -96,7 +96,7 @@ ax.set_xticks(np.arange(8), labels=RTT)
 ax.set_yticks(np.arange(8), labels=Bandwidth)
 for i in range(8):
     for j in range(8):
-        text = ax.text(j, i, format(retr_bbr[i, j],'.0f'), ha="center", va="center", color="w")
+        text = ax.text(i, j, format(retr_bbr[j, i],'.0f'), ha="center", va="center", color="w")
 fig.tight_layout()
 plt.xlabel("RTT (in ms)")
 plt.ylabel("Bandwidth (in mbps)")
@@ -110,7 +110,7 @@ ax.set_xticks(np.arange(8), labels=RTT)
 ax.set_yticks(np.arange(8), labels=Bandwidth)
 for i in range(8):
     for j in range(8):
-        text = ax.text(j, i, format(retr_cubic[i, j],'.0f'), ha="center", va="center", color="w")
+        text = ax.text(i, j, format(retr_cubic[j, i],'.0f'), ha="center", va="center", color="w")
 fig.tight_layout()
 plt.xlabel("RTT (in ms)")
 plt.ylabel("Bandwidth (in mbps)")

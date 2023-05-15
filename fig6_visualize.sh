@@ -1,5 +1,9 @@
 #!/bin/bash
 rm -rf *.csv
+echo "Latency" >> cubic_10mb.csv
+echo "Latency" >> bbr_10mb.csv
+echo "Latency" >> cubic_100mb.csv
+echo "Latency" >> bbr_100mb.csv
 for bufcap in 100 10000 
 do
     for bandwidth in 10 20 50 100 250 500 750 1000 
