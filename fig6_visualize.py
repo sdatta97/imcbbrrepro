@@ -16,9 +16,9 @@ for i in range(arr_length):
     rtt_idx = int(np.remainder(np.remainder(i, 64),8))
     print(bufcap_idx , bandwidth_idx , rtt_idx)
     if bufcap_idx == 0:
-        latency_bbr_100kb [7-bandwidth_idx, rtt_idx] = val_arr[i]
+        latency_bbr_100kb [bandwidth_idx, rtt_idx] = val_arr[i]
     else:
-        latency_bbr_10mb [7-bandwidth_idx, rtt_idx] = val_arr[i]
+        latency_bbr_10mb [bandwidth_idx, rtt_idx] = val_arr[i]
 print(latency_bbr_100kb)
 print(latency_bbr_10mb)
 
@@ -32,9 +32,9 @@ for i in range(arr_length):
     rtt_idx = int(np.remainder(np.remainder(i, 64),8))
     print(bufcap_idx , bandwidth_idx , rtt_idx)
     if bufcap_idx == 0:
-        latency_cubic_100kb [7-bandwidth_idx, rtt_idx] = val_arr[i]
+        latency_cubic_100kb [bandwidth_idx, rtt_idx] = val_arr[i]
     else:
-        latency_cubic_10mb [7-bandwidth_idx, rtt_idx] = val_arr[i]
+        latency_cubic_10mb [bandwidth_idx, rtt_idx] = val_arr[i]
 print(latency_cubic_100kb)
 print(latency_cubic_10mb)
 
@@ -42,8 +42,8 @@ latdec_100kb = np.ones((8,8))
 latdec_10mb = np.ones((8,8))
 for bandwidth_idx in range(8):
     for rtt_idx in range(8):
-        latdec_100kb[bandwidth_idx,rtt_idx] = np.divide((latency_bbr_100kb[7-bandwidth_idx,rtt_idx] - latency_cubic_100kb[7-bandwidth_idx,rtt_idx]), latency_cubic_100kb[7-bandwidth_idx,rtt_idx])
-        latdec_10mb[bandwidth_idx,rtt_idx]  = np.divide((latency_bbr_10mb[7-bandwidth_idx,rtt_idx] - latency_cubic_10mb[7-bandwidth_idx,rtt_idx]), latency_cubic_10mb[7-bandwidth_idx,rtt_idx])
+        latdec_100kb[bandwidth_idx,rtt_idx] = np.divide((latency_cubic_100kb[7-bandwidth_idx,rtt_idx] - latency_bbr_100kb[7-bandwidth_idx,rtt_idx]), latency_cubic_100kb[7-bandwidth_idx,rtt_idx])
+        latdec_10mb[bandwidth_idx,rtt_idx]  = np.divide((latency_cubic_10mb[7-bandwidth_idx,rtt_idx] - latency_bbr_10mb[7-bandwidth_idx,rtt_idx]), latency_cubic_10mb[7-bandwidth_idx,rtt_idx])
 print(latdec_100kb)
 fig, ax = plt.subplots()
 im = ax.imshow(latdec_100kb)
@@ -55,6 +55,8 @@ for i in range(8):
         text = ax.text(i, j, format(latdec_100kb[j, i],'.2f'), ha="center", va="center", color="w")
 fig.tight_layout()
 plt.colorbar(im, label="Latency decrease", orientation="vertical")
+plt.xlabel("RTT (in ms)")
+plt.ylabel("Bandwidth (in mbps)")
 plt.show()
 
 print(latdec_10mb)
@@ -68,4 +70,6 @@ for i in range(8):
         text = ax.text(i, j, format(latdec_10mb[j, i],'.2f'), ha="center", va="center", color="w")
 fig.tight_layout()
 plt.colorbar(im, label="Latency decrease", orientation="vertical")
+plt.xlabel("RTT (in ms)")
+plt.ylabel("Bandwidth (in mbps)")
 plt.show()
