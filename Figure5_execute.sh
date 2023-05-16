@@ -36,9 +36,9 @@ do
                 sudo ssh -o StrictHostKeyChecking=no -T root@h3 "ping -c 1 h1"
                 sudo ssh -o StrictHostKeyChecking=no -T root@h1 "ping -c 1 h3"              
                 sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
-                sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C cubic -t 60s -fk| tee ./fig5/"$bufcap"_"$bandwidth"_"$delay"_"$trial_idx"_cubic.txt"
+                sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C cubic -t 60s -fk > ./fig5/"$bufcap"_"$bandwidth"_"$delay"_"$trial_idx"_cubic.txt"
                 sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
-                sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C bbr -t 60s -fk | tee ./fig5/"$bufcap"_"$bandwidth"_"$delay"_"$trial_idx"_bbr.txt"
+                sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C bbr -t 60s -fk > ./fig5/"$bufcap"_"$bandwidth"_"$delay"_"$trial_idx"_bbr.txt"
             done
         done
     done
