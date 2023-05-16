@@ -7,9 +7,6 @@
 
 sudo ssh -o StrictHostKeyChecking=no -T root@h3 "mkdir -p fig7"
 sudo ssh -o StrictHostKeyChecking=no -T root@h1 "mkdir -p fig7"
-## bandwidth = 100;
-## bufcap = 10000;
-## rtt = 25;
 for loss_pc in 0 1 2 3 6 12 18 27 36 45 50
 do
     for trial in 1 2 3 4 5
