@@ -38,10 +38,10 @@ do
         ## Set up network delay 
         sudo tc qdisc replace dev $(ip route get 10.10.3.1 | grep -oP "(?<=dev )[^ ]+") root netem delay 10ms
         sleep 10
-        sudo ssh -o StrictHostKeyChecking=no -T root@h3 "ping -c 1 h1"
-        sudo ssh -o StrictHostKeyChecking=no -T root@h1 "ping -c 1 h3"
-        sudo ssh -o StrictHostKeyChecking=no -T root@h3 "ping -c 1 h2"
-        sudo ssh -o StrictHostKeyChecking=no -T root@h2 "ping -c 1 h3" 
+        ## sudo ssh -o StrictHostKeyChecking=no -T root@h3 "ping -c 1 h1"
+        ## sudo ssh -o StrictHostKeyChecking=no -T root@h1 "ping -c 1 h3"
+        ## sudo ssh -o StrictHostKeyChecking=no -T root@h3 "ping -c 1 h2"
+        ## sudo ssh -o StrictHostKeyChecking=no -T root@h2 "ping -c 1 h3" 
         sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
         sudo ssh -o StrictHostKeyChecking=no -T root@h1 "nohup iperf3 -c h3 -p 5201 -C cubic -t 60s -fk >./fig8/"$bufcap"_"$trial"_cubic.txt 2>/dev/null &"
         sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -p 5002 -1 -D"
