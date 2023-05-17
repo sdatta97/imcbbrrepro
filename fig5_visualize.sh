@@ -23,7 +23,7 @@ do
                 rg sender "$bufcap"_"$bandwidth"_"$delay"_"$trial"_cubic.txt -A 0 | awk -v fname="$expstr" '{print fname",cubic," $7}'  >> cubic.csv      
                 rg sender "$bufcap"_"$bandwidth"_"$delay"_"$trial"_bbr.txt -A 0 | awk -v fname="$expstr" '{print fname",bbr," $7}'  >> bbr.csv      
                 rg sender "$bufcap"_"$bandwidth"_"$delay"_"$trial"_cubic.txt -A 0 | awk -v fname="$expstr" '{print fname",cubic," $9}'  >> cubic_retr.csv      
-                rg sender "$bufcap"_"$bandwidth"_"$delay"_"$trial"_bbr.txt -A 0 | awk -v fname="$expstr" '{print fname",cubic," $9}'  >> bbr_retr.csv      
+                rg sender "$bufcap"_"$bandwidth"_"$delay"_"$trial"_bbr.txt -A 0 | awk -v fname="$expstr" '{print fname",bbr," $9}'  >> bbr_retr.csv      
                 ## rg sender "$bufcap"_"$bandwidth"_"$delay"_"$trial"_bbr.txt -A 0 | awk '{print $7}'  >> bbr.csv 
                 ## rg sender "$bufcap"_"$bandwidth"_"$delay"_"$trial"_cubic.txt -A 0 | awk '{print $9}'  >> cubic_retr.csv      
                 ## rg sender "$bufcap"_"$bandwidth"_"$delay"_"$trial"_bbr.txt -A 0 | awk '{print $9}'  >> bbr_retr.csv  
