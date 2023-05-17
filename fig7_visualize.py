@@ -3,52 +3,34 @@ import pandas as pd
 import matplotlib as mpl
 import matplotlib.pyplot as plt 
 
-# reading the CSV file
-val_arr = np.array(pd.read_csv('bbr_goodput.csv'))
-goodput_bbr = np.ones((11,1))
-arr_length = val_arr.size
-for i in range(arr_length):
-    goodput_bbr [i] = val_arr[i]
-## print(goodput_bbr)
-
-# reading the CSV file
-val_arr = np.array(pd.read_csv('cubic_goodput.csv'))
-goodput_cubic = np.ones((11,1))
-arr_length = val_arr.size
-for i in range(arr_length):
-    goodput_cubic [i] = val_arr[i]
-## print(goodput_cubic)
-
-val_arr = np.array(pd.read_csv('bbr_retr.csv'))
-retr_bbr = np.ones((11,1))
-arr_length = val_arr.size
-for i in range(int(arr_length)):
-    retr_bbr [i] = val_arr[i]
-## print(retr_bbr)
-
-# reading the CSV file
-val_arr = np.array(pd.read_csv('cubic_retr.csv'))
-retr_cubic = np.ones((11,1))
-arr_length = val_arr.size
-for i in range(int(arr_length)):
-    retr_cubic [i] = val_arr[i]
-## print(retr_cubic)
-
-loss = ["0","1","2","3","6","12","18","27","36","45","50"] 
-# Show all ticks and label them with the respective list entries
-plt.plot(np.arange(11))
-plt.xlabel("Loss (in %)")
-plt.ylabel("Goodput (in mbps)")
+dat = pd.read_csv('tput.csv')
+dat = dat.groupby(by=["Loss_pc"]).mean().reset_index()
+loss_arr = np.array([0,1,2,3,6,12,18,27,36,45,50])
+val_arr = np.divide(np.array(dat.BBR_goodput),1000)
+plt.plot(loss_arr,val_arr, label="BBR")
+val_arr = np.divide(np.array(dat.CUBIC_goodput),1000)
+plt.plot(loss_arr,val_arr, label="CUBIC")
+val_arr = np.divide(np.array(dat.Reno_goodput),1000)
+plt.plot(loss_arr,val_arr, label="Reno")
+plt.title("Goodput comparison against loss")
+plt.xlabel("Loss percentage (%)")
+plt.ylabel("Goodput (in Mbps)")
+plt.legend(["BBR", "CUBIC","Reno"])
 plt.show()
 
-loss = ["0","1","2","3","6","12","18","27","36","45","50"] 
-fig, (ax1 ,ax2) = plt.subplots()
-# Show all ticks and label them with the respective list entries
-ax1.set_xticks(np.arange(11), labels=loss)
-im = ax1.imshow(retr_bbr)
-ax2.set_xticks(np.arange(11), labels=loss)
-im = ax2.imshow(retr_cubic)
-fig.tight_layout()
-plt.xlabel("Loss (in %)")
+dat = pd.read_csv('retr.csv')
+dat = dat.groupby(by=["Loss_pc"]).mean().reset_index()
+val_arr = np.array(dat.BBR_retransmissions)
+print(val_arr)
+plt.plot(loss_arr,val_arr, label="BBR")
+val_arr = np.array(dat.CUBIC_retransmissions)
+print(val_arr)
+plt.plot(loss_arr,val_arr, label="CUBIC")
+val_arr = np.array(dat.Reno_retransmissions)
+print(val_arr)
+plt.plot(loss_arr,val_arr, label="Reno")
+plt.title("Retransmissions comparison against loss")
+plt.xlabel("Loss percentage (%)")
 plt.ylabel("Number of retransmissions")
+plt.legend(["BBR", "CUBIC","Reno"])
 plt.show()
