@@ -1,11 +1,14 @@
 #!/bin/bash
 rm -rf *.csv
-for loss_pc in 0 1 2 3 6 12 18 27 36 45 50
+echo "BBR_goodput,CUBIC_goodput,Buffer" >> tput.csv
+
+for bufcap in 10 100 1000 5000 10000 
 do
-    cat "$loss_pc"_bbr.txt | grep "Bitrate" -A 1 | grep -v "Bitrate" | tail -n 1 | awk '{print $7}' >> bbr_goodput.csv
-    cat "$loss_pc"_cubic.txt | grep "Bitrate" -A 1 | grep -v "Bitrate" | tail -n 1 | awk '{print $7}' >> cubic_goodput.csv
-    cat "$loss_pc"_reno.txt | grep "Bitrate" -A 1 | grep -v "Bitrate" | tail -n 1 | awk '{print $7}' >> reno_goodput.csv
-    cat "$loss_pc"_bbr.txt | grep "Bitrate" -A 1 | grep -v "Bitrate" | tail -n 1 | awk '{print $9}' >> bbr_retr.csv
-    cat "$loss_pc"_cubic.txt | grep "Bitrate" -A 1 | grep -v "Bitrate" | tail -n 1 | awk '{print $9}' >> cubic_retr.csv 
-    cat "$loss_pc"_reno.txt | grep "Bitrate" -A 1 | grep -v "Bitrate" | tail -n 1 | awk '{print $9}' >> reno_retr.csv
+    for trial in 1 2 3 4 5
+    do 
+        expstr="$bufcap"
+        bbr_tput=$(cat "$bufcap"_"$trial"_bbr.txt | grep "Bandwidth" -A 1 | grep -v "Bandwidth" | tail -n 1 | awk '{print $7}')
+        cubic_tput=$(cat "$bufcap"_"$trial"_cubic.txt | grep "Bandwidth" -A 1 | grep -v "Bandwidth" | tail -n 1 | awk '{print $7}')
+        echo "$bbr_tput,$cubic_tput,$expstr" >> tput.csv
+    done
 done
