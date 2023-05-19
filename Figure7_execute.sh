@@ -16,7 +16,6 @@ do
         ## Set up network delay 
         sudo tc qdisc replace dev $(ip route get 10.10.1.1 | grep -oP "(?<=dev )[^ ]+") root netem delay 25ms
         ## add loss in same line
-        ## Add loss to network
         ## sudo tc qdisc replace dev $(ip route get 10.10.1.1 | grep -oP "(?<=dev )[^ ]+") root netem loss $loss_pc%
         ## Create an htb qdisc
         ## sudo tc qdisc replace dev $(ip route get 10.10.1.1 | grep -oP "(?<=dev )[^ ]+") root handle 1: htb default 3  
@@ -30,12 +29,13 @@ do
         sudo tc qdisc replace dev $(ip route get 10.10.3.1 | grep -oP "(?<=dev )[^ ]+") root handle 1: htb default 3
         ## Limit the queue traffic to the bandwidth
         sudo tc class add dev $(ip route get 10.10.3.1 | grep -oP "(?<=dev )[^ ]+") parent 1: classid 1:3 htb rate 100Mbit
-        sudo tc qdisc add dev $(ip route get 10.10.3.1 | grep -oP "(?<=dev )[^ ]+") parent 1:3 handle 3: root netem loss $loss_pc%
+         ## Add loss to network
+        sudo tc qdisc add dev $(ip route get 10.10.3.1 | grep -oP "(?<=dev )[^ ]+") parent 1:3 handle 3: netem loss $loss_pc%
         ## Set up queue limit
-        sudo tc qdisc add dev $(ip route get 10.10.3.1 | grep -oP "(?<=dev )[^ ]+") parent 1:3 bfifo limit 10Mb
+        sudo tc qdisc add dev $(ip route get 10.10.3.1 | grep -oP "(?<=dev )[^ ]+") parent 3:1 bfifo limit 10Mb
         sleep 10
         ## sudo ssh -o StrictHostKeyChecking=no -T root@h3 "ping -c 1 h1"
-        sudo ssh -o StrictHostKeyChecking=no -T root@h1 "ping -c 10 h3"
+        ## sudo ssh -o StrictHostKeyChecking=no -T root@h1 "ping -c 10 h3"
         sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
         sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C cubic -t 60s -fk > ./fig7/"$loss_pc"_"$trial"_cubic.txt"
         sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
