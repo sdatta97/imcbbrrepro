@@ -21,4 +21,6 @@ CONFIG_MODULE_SIG_ALL=n
 CONFIG_DEBUG_INFO_BTF=n
 sudo make -j $(nproc)
 sudo make modules -j $(nproc)
-sudo make modules_install -j $
+sudo make modules_install -j $(nproc)
+sudo make install -j $(nproc)
+sudo reboot now
