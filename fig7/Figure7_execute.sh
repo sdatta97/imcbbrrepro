@@ -1,9 +1,9 @@
 #!/bin/bash
 ##code runs on router (tbf)
-# sysctl -w net.core.rmem_default=2147483647
-# sysctl -w net.core.wmem_default=2147483647
-# sysctl -w net.core.rmem_max=2147483647
-# sysctl -w net.core.wmem_max=2147483647
+sysctl -w net.core.rmem_default=2147483647
+sysctl -w net.core.wmem_default=2147483647
+sysctl -w net.core.rmem_max=2147483647
+sysctl -w net.core.wmem_max=2147483647
 
 sudo ssh -o StrictHostKeyChecking=no -T root@h1 "mkdir -p fig7"
 
