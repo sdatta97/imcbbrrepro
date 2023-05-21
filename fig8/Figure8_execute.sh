@@ -1,13 +1,12 @@
 #!/bin/bash
 ##code runs on router (tbf)
-sysctl -w net.core.rmem_default=2147483647
-sysctl -w net.core.wmem_default=2147483647
-sysctl -w net.core.rmem_max=2147483647
-sysctl -w net.core.wmem_max=2147483647
+sudo sysctl -w net.core.rmem_default=2147483647
+sudo sysctl -w net.core.wmem_default=2147483647
+sudo sysctl -w net.core.rmem_max=2147483647
+sudo sysctl -w net.core.wmem_max=2147483647
 
 sudo ssh -o StrictHostKeyChecking=no -T root@h1 "mkdir -p fig8"
 sudo ssh -o StrictHostKeyChecking=no -T root@h2 "mkdir -p fig8"
-sudo ssh -o StrictHostKeyChecking=no -T root@h3 "mkdir -p fig8"
 for bufcap in 10 100 1000 5000 10000 
 do
     for trial in 1 2 3 4 5
