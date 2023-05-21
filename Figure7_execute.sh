@@ -52,15 +52,18 @@ do
         sudo tc qdisc add dev $(ip route get 10.10.3.1 | grep -oP "(?<=dev )[^ ]+") parent 1:3 handle 3: netem loss $loss_pc%
         ## Set up queue limit
         sudo tc qdisc add dev $(ip route get 10.10.3.1 | grep -oP "(?<=dev )[^ ]+") parent 3:1 bfifo limit 10Mb
-        sleep 10
-        sudo ssh -o StrictHostKeyChecking=no -T root@h1 "ping -c 10 h3"
+        ## sudo ssh -o StrictHostKeyChecking=no -T root@h1 "ping -c 10 h3"
         sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
+        sleep 10
         sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C cubic -t 60s -fk > ./fig7/"$loss_pc"_"$trial"_cubic.txt"
-        sleep 10
+        sleep 30
         sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
+        sleep 10
         sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C bbr -t 60s -fk > ./fig7/"$loss_pc"_"$trial"_bbr.txt"
-        sleep 10
+        sleep 30
         sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
+        sleep 10
         sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C reno -t 60s -fk > ./fig7/"$loss_pc"_"$trial"_reno.txt"
+        sleep 30
     done
 done
