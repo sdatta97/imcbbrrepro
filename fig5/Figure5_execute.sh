@@ -39,7 +39,7 @@ do
                 sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C cubic -t 60s -fk > ./fig5/"$bufcap"_"$bandwidth"_"$rtt"_"$trial_idx"_cubic.txt"
                 sleep 10
                 sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
-                sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C bbr -t 60s -fk > ./fig5/"$bufcap"_"$bandwidth"_"$rtt"_"$trial_idx"_bbr.txt"
+                sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C bbr2 -t 60s -fk > ./fig5/"$bufcap"_"$bandwidth"_"$rtt"_"$trial_idx"_bbr2.txt"
             done
         done
     done

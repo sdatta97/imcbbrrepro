@@ -11,12 +11,12 @@ do
             for trial in 1 2 3 4 5
             do
                 expstr="$bufcap,$bandwidth,$rtt"
-                bbr_tput=$(rg sender "$bufcap"_"$bandwidth"_"$rtt"_"$trial"_bbr.txt -A 0 | awk '{print $7}') 
+                bbr2_tput=$(rg sender "$bufcap"_"$bandwidth"_"$rtt"_"$trial"_bbr2.txt -A 0 | awk '{print $7}') 
                 cubic_tput=$(rg sender "$bufcap"_"$bandwidth"_"$rtt"_"$trial"_cubic.txt -A 0 | awk '{print $7}') 
-                echo "$bbr_tput,$cubic_tput,$expstr" >> tput.csv  
-                bbr_retr=$(rg sender "$bufcap"_"$bandwidth"_"$rtt"_"$trial"_bbr.txt -A 0 | awk '{print $9}') 
+                echo "$bbr2_tput,$cubic_tput,$expstr" >> tput.csv  
+                bbr2_retr=$(rg sender "$bufcap"_"$bandwidth"_"$rtt"_"$trial"_bbr2.txt -A 0 | awk '{print $9}') 
                 cubic_retr=$(rg sender "$bufcap"_"$bandwidth"_"$rtt"_"$trial"_cubic.txt -A 0 | awk '{print $9}')   
-                echo "$bbr_retr,$cubic_retr,$expstr" >> retr.csv    
+                echo "$bbr2_retr,$cubic_retr,$expstr" >> retr.csv    
             done      
         done
     done   
