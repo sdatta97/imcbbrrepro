@@ -21,15 +21,15 @@ sudo tc class add dev $(ip route get 10.10.3.1 | grep -oP "(?<=dev )[^ ]+") pare
 sudo tc qdisc add dev $(ip route get 10.10.3.1 | grep -oP "(?<=dev )[^ ]+") parent 1:3 bfifo limit 10Mb
 for trial in 1 2 3 4 5
 do
+    ##sleep 10
+    ##sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
+    ##sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C cubic -t 60s -fk > ./fig7/"0"_"$trial"_cubic.txt"
     sleep 10
     sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
-    sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C cubic -t 60s -fk > ./fig7/"0"_"$trial"_cubic.txt"
-    sleep 10
-    sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
-    sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C bbr -t 60s -fk > ./fig7/"0"_"$trial"_bbr.txt"
-    sleep 10
-    sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
-    sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C reno -t 60s -fk > ./fig7/"0"_"$trial"_reno.txt"
+    sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C bbr2 -t 60s -fk > ./fig7/"0"_"$trial"_bbr2.txt"
+    ##sleep 10
+    ##sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
+    ##sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C reno -t 60s -fk > ./fig7/"0"_"$trial"_reno.txt"
 done
  ## Delete any existing queues
 sudo tc qdisc del dev $(ip route get 10.10.1.1 | grep -oP "(?<=dev )[^ ]+") root  
@@ -57,7 +57,7 @@ do
         sleep 30
         sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
         sleep 10
-        sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C bbr -t 60s -fk > ./fig7/"$loss_pc"_"$trial"_bbr.txt"
+        sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C bbr2 -t 60s -fk > ./fig7/"$loss_pc"_"$trial"_bbr2.txt"
         sleep 30
         sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
         sleep 10

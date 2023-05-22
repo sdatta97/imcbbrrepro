@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 dat = pd.read_csv('tput.csv')
 dat = dat.groupby(by=["Loss_pc"]).mean().reset_index()
-loss_arr = np.array([0,1,2,3,6,12,18,27,36,45,50])
+loss_arr = np.array([0,1,3,6,12,18,27,36,45,50])
 val_arr = np.divide(np.array(dat.BBR_goodput),1000)
 plt.plot(loss_arr,val_arr, label="BBR")
 val_arr = np.divide(np.array(dat.CUBIC_goodput),1000)
