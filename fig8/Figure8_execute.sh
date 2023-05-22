@@ -46,8 +46,8 @@ do
         sudo ssh -o StrictHostKeyChecking=no -T root@h3 "ping -c 1 h2"
         sudo ssh -o StrictHostKeyChecking=no -T root@h2 "ping -c 1 h3" 
         sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
-        sudo ssh -o StrictHostKeyChecking=no -T root@h1 "nohup iperf3 -c h3 -p 5201 -C cubic -t 60s -fk >./fig8/"$bufcap"_"$trial"_cubic.txt 2>/dev/null &"
+        sudo ssh -o StrictHostKeyChecking=no -T root@h2 "nohup iperf3 -c h3 -p 5201 -C cubic -t 60s -fk >./fig8/"$bufcap"_"$trial"_cubic.txt 2>/dev/null &"
         sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -p 5002 -1 -D"
-        sudo ssh -o StrictHostKeyChecking=no -T root@h2 "iperf3 -c h3 -p 5002 -C bbr -t 60s -fk > ./fig8/"$bufcap"_"$trial"_bbr.txt"
+        sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -p 5002 -C bbr2 -t 60s -fk > ./fig8/"$bufcap"_"$trial"_bbr2.txt"
     done
 done
