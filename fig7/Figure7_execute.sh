@@ -26,7 +26,7 @@ do
     ##sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C cubic -t 60s -fk > ./fig7/"0"_"$trial"_cubic.txt"
     sleep 10
     sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
-    sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C bbr2 -t 60s -fk > ./fig7/"0"_"$trial"_bbr2.txt"
+    sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C bbr -t 60s -fk > ./fig7/"0"_"$trial"_bbr21dot1.txt"
     ##sleep 10
     ##sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
     ##sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C reno -t 60s -fk > ./fig7/"0"_"$trial"_reno.txt"
@@ -57,7 +57,7 @@ do
         sleep 30
         sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
         sleep 10
-        sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C bbr2 -t 60s -fk > ./fig7/"$loss_pc"_"$trial"_bbr2.txt"
+        sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C bbr -t 60s -fk > ./fig7/"$loss_pc"_"$trial"_bbr.txt"
         sleep 30
         sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
         sleep 10
