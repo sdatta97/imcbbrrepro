@@ -1,4 +1,4 @@
-Clone the GitHub repository on your personal device.
+Clone the GitHub repository on your personal device into a directory with path <repository_home_dir>.
 
 Open terminal. Using scp, transfer the file Figure7_execute.sh to the router, which is the network node tbf:
 
@@ -30,13 +30,14 @@ After completion, switch to the terminal with host h1 logged in. Copy the data f
 
 Use scp to transfer the data files to your personal device. 
   
-  scp -r <CloudLab username>@<hostname of h1>:~/fig7 .    
+  scp -r <CloudLab_username>@<hostname_of_h1>:~/fig7 . 
+  
 
 On your personal device, move the visualization scripts and execute them as follows:
   
   cd ~/fig7
   
-  sudo cp <clone directory of repository>/fig7/fig7_visualize.* .
+  sudo cp <repository_home_dir>/fig7/fig7_visualize.* .
   
   sh fig7_visualize.sh
   
