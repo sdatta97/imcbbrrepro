@@ -1,6 +1,6 @@
 Clone the GitHub repository on your personal device.
 
-Open terminal. Using scp, transfer the file Figure5_execute.sh to the router, which is the network node tbf:
+Open terminal. Using scp, transfer the file Figure6_execute.sh to the router, which is the network node tbf:
 
   scp <repository_home_dir>/fig6/Figure6_execute.sh  <CloudLab username>@<hostname of tbf router>:~
 
@@ -38,8 +38,8 @@ On your personal device, move the visualization scripts and execute them as foll
   
   sudo cp <clone directory of repository>/fig6/fig6_visualize.* .
   
-  sh fig5_visualize.sh
+  sh fig6_visualize.sh
   
-  python3 fig5_visualize.py
+  python3 fig6_visualize.py
 
 Save the figures when prompted by Matplotlib. 
