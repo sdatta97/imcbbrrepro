@@ -2,7 +2,7 @@ Clone the GitHub repository on your personal device.
 
 Open terminal. Using scp, transfer the file Figure7_execute.sh to the router, which is the network node tbf:
 
-  scp <repository_home_dir>/fig6/Figure7_execute.sh  <CloudLab username>@<hostname of tbf router>:~
+  scp <repository_home_dir>/fig7/Figure7_execute.sh  <CloudLab_username>@<hostname_of_tbf_router>:~
 
 Open another terminal and log in to the router, tbf. Install screen using the following commands:
   
