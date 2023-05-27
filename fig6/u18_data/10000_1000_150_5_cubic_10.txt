@@ -1,0 +1,11 @@
+Connecting to host h3, port 5201
+[  4] local 10.10.1.1 port 55248 connected to 10.10.3.1 port 5201
+[ ID] Interval           Transfer     Bandwidth       Retr  Cwnd
+[  4]   0.00-1.00   sec  2.52 MBytes  21138 Kbits/sec    0    419 KBytes       
+[  4]   1.00-1.53   sec  7.50 MBytes  119090 Kbits/sec    0   6.01 MBytes       
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bandwidth       Retr
+[  4]   0.00-1.53   sec  10.0 MBytes  54994 Kbits/sec    0             sender
+[  4]   0.00-1.53   sec  9.13 MBytes  50115 Kbits/sec                  receiver
+
+iperf Done.

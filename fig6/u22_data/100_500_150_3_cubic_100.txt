@@ -1,0 +1,30 @@
+Connecting to host h3, port 5201
+[  5] local 10.10.1.1 port 55180 connected to 10.10.3.1 port 5201
+[ ID] Interval           Transfer     Bitrate         Retr  Cwnd
+[  5]   0.00-1.00   sec  2.07 MBytes  17391 Kbits/sec    6    323 KBytes       
+[  5]   1.00-2.00   sec  1.79 MBytes  15033 Kbits/sec   16    253 KBytes       
+[  5]   2.00-3.00   sec  1.19 MBytes  10019 Kbits/sec    0    271 KBytes       
+[  5]   3.00-4.00   sec  1.79 MBytes  15035 Kbits/sec    0    288 KBytes       
+[  5]   4.00-5.00   sec  2.39 MBytes  20045 Kbits/sec    0    323 KBytes       
+[  5]   5.00-6.00   sec  1.79 MBytes  15033 Kbits/sec    0    350 KBytes       
+[  5]   6.00-7.00   sec  2.39 MBytes  20042 Kbits/sec    0    384 KBytes       
+[  5]   7.00-8.00   sec  3.05 MBytes  25557 Kbits/sec    0    498 KBytes       
+[  5]   8.00-9.00   sec  3.82 MBytes  32067 Kbits/sec    0    717 KBytes       
+[  5]   9.00-10.00  sec  6.39 MBytes  53579 Kbits/sec    0   1.02 MBytes       
+[  5]  10.00-11.00  sec  8.75 MBytes  73407 Kbits/sec    0   1.45 MBytes       
+[  5]  11.00-12.00  sec  10.0 MBytes  83884 Kbits/sec    0   2.03 MBytes       
+[  5]  12.00-13.00  sec  15.0 MBytes  125828 Kbits/sec   22   1.45 MBytes       
+[  5]  13.00-14.00  sec  5.00 MBytes  41939 Kbits/sec  271    813 KBytes       
+[  5]  14.00-15.00  sec  5.00 MBytes  41945 Kbits/sec    5    725 KBytes       
+[  5]  15.00-16.00  sec  5.00 MBytes  41945 Kbits/sec    0    786 KBytes       
+[  5]  16.00-17.00  sec  5.00 MBytes  41939 Kbits/sec    0    795 KBytes       
+[  5]  17.00-18.00  sec  5.00 MBytes  41946 Kbits/sec    0    795 KBytes       
+[  5]  18.00-19.00  sec  5.00 MBytes  41942 Kbits/sec    0    795 KBytes       
+[  5]  19.00-20.00  sec  5.00 MBytes  41937 Kbits/sec    0    839 KBytes       
+[  5]  20.00-20.68  sec  5.00 MBytes  61771 Kbits/sec    0    883 KBytes       
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bitrate         Retr
+[  5]   0.00-20.68  sec   100 MBytes  40739 Kbits/sec  320             sender
+[  5]   0.00-20.83  sec  97.5 MBytes  39263 Kbits/sec                  receiver
+
+iperf Done.

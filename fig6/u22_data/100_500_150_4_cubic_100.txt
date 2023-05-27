@@ -1,0 +1,30 @@
+Connecting to host h3, port 5201
+[  5] local 10.10.1.1 port 41716 connected to 10.10.3.1 port 5201
+[ ID] Interval           Transfer     Bitrate         Retr  Cwnd
+[  5]   0.00-1.00   sec  1.74 MBytes  14600 Kbits/sec    6    288 KBytes       
+[  5]   1.00-2.00   sec  1.67 MBytes  14031 Kbits/sec   15    227 KBytes       
+[  5]   2.00-3.00   sec  1.08 MBytes  9017 Kbits/sec    0    245 KBytes       
+[  5]   3.00-4.00   sec  1.61 MBytes  13530 Kbits/sec    0    262 KBytes       
+[  5]   4.00-5.00   sec  2.09 MBytes  17543 Kbits/sec    0    297 KBytes       
+[  5]   5.00-6.00   sec  1.91 MBytes  16035 Kbits/sec    0    332 KBytes       
+[  5]   6.00-7.00   sec  1.97 MBytes  16535 Kbits/sec    0    358 KBytes       
+[  5]   7.00-8.00   sec  3.11 MBytes  26058 Kbits/sec    0    472 KBytes       
+[  5]   8.00-9.00   sec  3.70 MBytes  31065 Kbits/sec    0    682 KBytes       
+[  5]   9.00-10.00  sec  6.27 MBytes  52610 Kbits/sec    0   1014 KBytes       
+[  5]  10.00-11.00  sec  8.75 MBytes  73411 Kbits/sec    0   1.43 MBytes       
+[  5]  11.00-12.00  sec  10.0 MBytes  83876 Kbits/sec    0   1.99 MBytes       
+[  5]  12.00-13.00  sec  15.0 MBytes  125844 Kbits/sec    7   2.33 MBytes       
+[  5]  13.00-14.00  sec  5.00 MBytes  41934 Kbits/sec  283    804 KBytes       
+[  5]  14.00-15.00  sec  5.00 MBytes  41939 Kbits/sec   12    725 KBytes       
+[  5]  15.00-16.00  sec  5.00 MBytes  41949 Kbits/sec    0    778 KBytes       
+[  5]  16.00-17.00  sec  5.00 MBytes  41943 Kbits/sec    0    786 KBytes       
+[  5]  17.00-18.00  sec  5.00 MBytes  41938 Kbits/sec    0    786 KBytes       
+[  5]  18.00-19.00  sec  5.00 MBytes  41949 Kbits/sec    0    795 KBytes       
+[  5]  19.00-20.00  sec  5.00 MBytes  41939 Kbits/sec    0    830 KBytes       
+[  5]  20.00-20.93  sec  6.25 MBytes  56480 Kbits/sec    0    900 KBytes       
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bitrate         Retr
+[  5]   0.00-20.93  sec   100 MBytes  40145 Kbits/sec  323             sender
+[  5]   0.00-21.08  sec  97.2 MBytes  38698 Kbits/sec                  receiver
+
+iperf Done.
