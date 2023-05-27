@@ -1,5 +1,3 @@
-Create new profile on CloudLab using profile.py 
-
 ssh into h1 
 
 Create partition in h1 to install BBR kernel
