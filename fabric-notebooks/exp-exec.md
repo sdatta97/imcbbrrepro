@@ -62,6 +62,7 @@ for bufcap in [100, 10000]:
 
             # quick validation
             tx_node.execute("ping -c 5 h3")
+            time.sleep(10)
             rx_node.execute("iperf3 -s -1 -D")
             tx_node.execute("iperf3 -t 30 -i 30 -P 10 -c h3")
 
