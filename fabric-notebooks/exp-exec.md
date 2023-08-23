@@ -31,6 +31,16 @@ cc_variants = ["cubic", "bbr"]
 ```
 :::
 
+
+::: {.cell .code}
+```python
+# make sure they are loaded before you start!
+for cc in cc_variants:
+	tx_node.execute("sudo modprobe tcp_" + cc)
+```
+:::
+
+
 ::: {.cell .code}
 ```python
 for bufcap in [100, 10000]:
