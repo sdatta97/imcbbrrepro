@@ -18,8 +18,6 @@ router_egress_name = router_egress_iface.get_device_name()
 ```python
 tx_node = slice.get_node(name="h1")
 rx_node = slice.get_node(name="h3")
-
-tx_node.execute("mkdir -p fig5")
 ```
 :::
 
@@ -39,6 +37,16 @@ for cc in cc_variants:
 	tx_node.execute("sudo modprobe tcp_" + cc)
 ```
 :::
+
+
+::: {.cell .code}
+```python
+kernel = tx_node.execute("uname -r")[0].strip()
+data_dir = kernel + "_" + cc_variants[0] + "_" + cc_variants[1]
+tx_node.execute("mkdir -p " + data_dir)
+```
+:::
+
 
 
 ::: {.cell .code}
@@ -68,7 +76,7 @@ for bufcap in [100, 10000]:
 
             for trial_idx in [1, 2, 3, 4, 5]:
 
-                file_prefix = "fig5/%d_%d_%d_%d" % (bufcap, bandwidth, rtt, trial_idx)
+                file_prefix = data_dir + "/%d_%d_%d_%d" % (bufcap, bandwidth, rtt, trial_idx)
 
                 for cc in cc_variants:
                     time.sleep(10)
