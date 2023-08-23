@@ -23,6 +23,14 @@ tx_node.execute("mkdir -p fig5")
 ```
 :::
 
+
+::: {.cell .code}
+```python
+# congestion control algorithms to compare
+cc_variants = ["cubic", "bbr"]
+```
+:::
+
 ::: {.cell .code}
 ```python
 for bufcap in [100, 10000]:
@@ -51,15 +59,11 @@ for bufcap in [100, 10000]:
 
                 file_prefix = "fig5/%d_%d_%d_%d_" % (bufcap, bandwidth, rtt, trial_idx)
 
-                # cubic experiment
-                time.sleep(10)
-                rx_node.execute("iperf3 -s -1 -D")
-                tx_node.execute("iperf3 -c h3 -C cubic -t 60s -fk --logfile " + file_prefix + "_cubic.txt", quiet=True)
+                for cc in cc_variants:
+					time.sleep(10)
+					rx_node.execute("iperf3 -s -1 -D")
+					tx_node.execute("iperf3 -V -c h3 -C " + cc + " -t 60s -fk --logfile " + file_prefix + "_" + cc + ".txt", quiet=True)
 
-                # bbr experiment
-                time.sleep(10)
-                rx_node.execute("iperf3 -s -1 -D")
-                tx_node.execute("iperf3 -c h3 -C bbr -t 60s -fk --logfile " + file_prefix + "_bbr.txt", quiet=True)
 ```
 :::
 
