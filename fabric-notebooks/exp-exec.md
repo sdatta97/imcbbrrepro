@@ -67,12 +67,12 @@ for bufcap in [100, 10000]:
 
             for trial_idx in [1, 2, 3, 4, 5]:
 
-                file_prefix = "fig5/%d_%d_%d_%d_" % (bufcap, bandwidth, rtt, trial_idx)
+                file_prefix = "fig5/%d_%d_%d_%d" % (bufcap, bandwidth, rtt, trial_idx)
 
                 for cc in cc_variants:
-					time.sleep(10)
-					rx_node.execute("iperf3 -s -1 -D")
-					tx_node.execute("iperf3 -V -c h3 -C " + cc + " -t 60s -fk --logfile " + file_prefix + "_" + cc + ".txt", quiet=True)
+                    time.sleep(10)
+                    rx_node.execute("iperf3 -s -1 -D")
+                    tx_node.execute("iperf3 -V -c h3 -C " + cc + " -t 60s -fk --logfile " + file_prefix + "_" + cc + ".txt", quiet=True)
 
 ```
 :::
