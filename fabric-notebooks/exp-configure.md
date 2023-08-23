@@ -13,3 +13,10 @@ for node in slice.get_nodes():
 ```
 :::
 
+
+::: {.cell .code}
+```python
+slice.get_node(name="h1").execute("sudo modprobe tcp_bbr")
+```
+:::
+
