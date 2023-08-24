@@ -1,10 +1,5 @@
 #!/bin/bash
 ##code runs on router (tbf)
-sudo sysctl -w net.core.rmem_default=2147483647
-sudo sysctl -w net.core.wmem_default=2147483647
-sudo sysctl -w net.core.rmem_max=2147483647
-sudo sysctl -w net.core.wmem_max=2147483647
-
 sudo ssh -o StrictHostKeyChecking=no -T root@h1 "mkdir -p fig5"
 for bufcap in 100 10000 
 do
@@ -36,10 +31,10 @@ do
                 ## sudo ssh -o StrictHostKeyChecking=no -T root@h1 "ping -c 1 h3"              
                 sleep 10
                 sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
-                sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C cubic -t 60s -fk > ./fig5/"$bufcap"_"$bandwidth"_"$rtt"_"$trial_idx"_cubic.txt"
+                sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C cubic -t 60s -fkV > ./fig5/"$bufcap"_"$bandwidth"_"$rtt"_"$trial_idx"_cubic.txt"
                 sleep 10
                 sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
-                sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C bbr -t 60s -fk > ./fig5/"$bufcap"_"$bandwidth"_"$rtt"_"$trial_idx"_bbr.txt"
+                sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C bbr2 -t 60s -fkV > ./fig5/"$bufcap"_"$bandwidth"_"$rtt"_"$trial_idx"_bbr.txt"
             done
         done
     done
