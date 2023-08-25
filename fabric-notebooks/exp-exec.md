@@ -24,17 +24,18 @@ rx_node = slice.get_node(name="h3")
 
 ::: {.cell .code}
 ```python
-# congestion control algorithms to compare
-cc_variants = ["cubic", "bbr"]
-```
-:::
-
-
-::: {.cell .code}
-```python
-# make sure they are loaded before you start!
-for cc in cc_variants:
-	tx_node.execute("sudo modprobe tcp_" + cc)
+# generate full factorial experiment
+import itertools
+exp_factors = { 
+    'bufcap': [100, 10000],
+    'bandwidth': [10, 20, 50, 100, 250, 500, 750, 1000],
+    'rtt': [5, 10, 25, 50, 75, 100, 150, 200],
+    'cc': ["cubic", "bbr"],
+    'trial': [1,2,3,4,5]
+}
+factor_names = [k for k in exp_factors]
+factor_lists = list(itertools.product(*exp_factors.values()))
+exp_lists = [dict(zip(factor_names, factor_l)) for factor_l in factor_lists]
 ```
 :::
 
@@ -42,7 +43,7 @@ for cc in cc_variants:
 ::: {.cell .code}
 ```python
 kernel = tx_node.execute("uname -r")[0].strip()
-data_dir = kernel + "_" + cc_variants[0] + "_" + cc_variants[1]
+data_dir = kernel + "_" + exp_factors['cc'][0] + "_" + exp_factors['cc'][1]
 tx_node.execute("mkdir -p " + data_dir)
 ```
 :::
@@ -51,37 +52,29 @@ tx_node.execute("mkdir -p " + data_dir)
 
 ::: {.cell .code}
 ```python
-for bufcap in [100, 10000]:
-    for bandwidth in [10, 20, 50, 100, 250, 500, 750, 1000]: 
-        for rtt in [5, 10, 25, 50, 75, 100, 150, 200]: 
-            
-            print("Now running: buffer %d, bandwidth %d, RTT %d" % (bufcap, bandwidth, rtt))
-            
-            router_node.execute("sudo tc qdisc del dev " + router_ingress_name + " root")
-            router_node.execute("sudo tc qdisc del dev " + router_egress_name + " root")
 
+for exp in exp_lists:
 
-            # set up RTT
-            router_node.execute("sudo tc qdisc replace dev " + router_ingress_name + " root netem delay " + str(rtt) + "ms")
-            # set up rate limit, buffer limit
-            router_node.execute("sudo tc qdisc replace dev " + router_egress_name + " root handle 1: htb default 3")
-            router_node.execute("sudo tc class add dev " + router_egress_name + " parent 1: classid 1:3 htb rate " + str(bandwidth) + "Mbit")
-            router_node.execute("sudo tc qdisc add dev " + router_egress_name + " parent 1:3 bfifo limit " + str(bufcap) + "kb")
+    # TODO: check if we already ran this experiment
+    # (to allow stop/resume)
 
-            # quick validation
-            tx_node.execute("ping -c 5 h3")
-            time.sleep(10)
-            rx_node.execute("iperf3 -s -1 -D")
-            tx_node.execute("iperf3 -t 30 -i 30 -P 10 -c h3")
+    file_out = data_dir + "/%d_%d_%d_%d_%s.txt" % (exp['bufcap'], exp['bandwidth'], exp['rtt'], exp['trial'], exp['cc'])
 
-            for trial_idx in [1, 2, 3, 4, 5]:
+	tx_node.execute("sudo modprobe tcp_" + exp['cc'])
 
-                file_prefix = data_dir + "/%d_%d_%d_%d" % (bufcap, bandwidth, rtt, trial_idx)
+    router_node.execute("sudo tc qdisc del dev " + router_ingress_name + " root")
+    router_node.execute("sudo tc qdisc del dev " + router_egress_name + " root")
 
-                for cc in cc_variants:
-                    time.sleep(10)
-                    rx_node.execute("iperf3 -s -1 -D")
-                    tx_node.execute("iperf3 -V -c h3 -C " + cc + " -t 60s -fk --logfile " + file_prefix + "_" + cc + ".txt", quiet=True)
+    # set up RTT
+    router_node.execute("sudo tc qdisc replace dev " + router_ingress_name + " root netem delay " + str(exp['rtt']) + "ms")
+    # set up rate limit, buffer limit
+    router_node.execute("sudo tc qdisc replace dev " + router_egress_name + " root handle 1: htb default 3")
+    router_node.execute("sudo tc class add dev " + router_egress_name + " parent 1: classid 1:3 htb rate " + str(exp['bandwidth']) + "Mbit")
+    router_node.execute("sudo tc qdisc add dev " + router_egress_name + " parent 1:3 bfifo limit " + str(exp['bufcap']) + "kb")
+
+    time.sleep(10)
+    rx_node.execute("iperf3 -s -1 -D")
+    tx_node.execute("iperf3 -V -c h3 -C " + exp['cc'] + " -t 60s -fk -w 20M --logfile " + file_out, quiet=True)
 
 ```
 :::
