@@ -51,30 +51,34 @@ tx_node.execute("mkdir -p " + data_dir)
 
 ::: {.cell .code}
 ```python
-
 for exp in exp_lists:
 
-    # TODO: check if we already ran this experiment
-    # (to allow stop/resume)
-
+    # check if we already ran this experiment
+    # (allow stop/resume)
     file_out = data_dir + "/%d_%d_%d_%d_%s.txt" % (exp['bufcap'], exp['bandwidth'], exp['rtt'], exp['trial'], exp['cc'])
+    stdout, stderr = tx_node.execute("ls " + file_out, quiet=True)
 
-	tx_node.execute("sudo modprobe tcp_" + exp['cc'])
+    if len(stdout):
+        print("Already have " + file_out + ", skipping")
 
-    router_node.execute("sudo tc qdisc del dev " + router_ingress_name + " root")
-    router_node.execute("sudo tc qdisc del dev " + router_egress_name + " root")
+    elif len(stderr):
+        print("Running experiment to generate " + file_out)
 
-    # set up RTT
-    router_node.execute("sudo tc qdisc replace dev " + router_ingress_name + " root netem delay " + str(exp['rtt']) + "ms")
-    # set up rate limit, buffer limit
-    router_node.execute("sudo tc qdisc replace dev " + router_egress_name + " root handle 1: htb default 3")
-    router_node.execute("sudo tc class add dev " + router_egress_name + " parent 1: classid 1:3 htb rate " + str(exp['bandwidth']) + "Mbit")
-    router_node.execute("sudo tc qdisc add dev " + router_egress_name + " parent 1:3 bfifo limit " + str(exp['bufcap']) + "kb")
+        tx_node.execute("sudo modprobe tcp_" + exp['cc'])
 
-    time.sleep(10)
-    rx_node.execute("iperf3 -s -1 -D")
-    tx_node.execute("iperf3 -V -c h3 -C " + exp['cc'] + " -t 60s -fk -w 20M --logfile " + file_out, quiet=True)
+        router_node.execute("sudo tc qdisc del dev " + router_ingress_name + " root")
+        router_node.execute("sudo tc qdisc del dev " + router_egress_name + " root")
 
+        # set up RTT
+        router_node.execute("sudo tc qdisc replace dev " + router_ingress_name + " root netem delay " + str(exp['rtt']) + "ms")
+        # set up rate limit, buffer limit
+        router_node.execute("sudo tc qdisc replace dev " + router_egress_name + " root handle 1: htb default 3")
+        router_node.execute("sudo tc class add dev " + router_egress_name + " parent 1: classid 1:3 htb rate " + str(exp['bandwidth']) + "Mbit")
+        router_node.execute("sudo tc qdisc add dev " + router_egress_name + " parent 1:3 bfifo limit " + str(exp['bufcap']) + "kb")
+
+        time.sleep(10)
+        rx_node.execute("iperf3 -s -1 -D")
+        tx_node.execute("iperf3 -V -c h3 -C " + exp['cc'] + " -t 60s -fk -w 20M --logfile " + file_out, quiet=True)
 ```
 :::
 
