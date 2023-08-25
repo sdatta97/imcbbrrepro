@@ -1,7 +1,7 @@
 ::: {.cell .markdown}
 ### Validate base network
 
-Before we run any underlying experiment, we should check the "base" network - before adding any emulated delay or rate limiting - and make sure that it will not be a limiting factor in the experiment.
+Before we run any experiment, we should check the "base" network - before adding any emulated delay or rate limiting - and make sure that it will not be a limiting factor in the experiment.
 
 :::
 
