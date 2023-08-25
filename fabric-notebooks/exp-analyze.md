@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 
 ::: {.cell .code}
 ```python
-tput = tx_node.execute("cd " + data_dir + "; grep 'Kbits/sec.*sender' *.txt | awk -F'[_ .]' '{print $1\",\"$2\",\"$3\",\"$4\",\"$5\",\"$21}' ")
+tput = tx_node.execute("cd " + data_dir + "; grep 'Kbits/sec.*receiver' *.txt | awk -F'[_ .]' '{print $1\",\"$2\",\"$3\",\"$4\",\"$5\",\"$21}' ")
 ```
 :::
 
