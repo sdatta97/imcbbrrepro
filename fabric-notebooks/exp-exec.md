@@ -4,6 +4,24 @@
 
 ::: {.cell .code}
 ```python
+# generate full factorial experiment
+import itertools
+exp_factors = { 
+    'bufcap': [100, 10000],
+    'bandwidth': [10, 20, 50, 100, 250, 500, 750, 1000],
+    'rtt': [5, 10, 25, 50, 75, 100, 150, 200],
+    'cc': ["cubic", "bbr"],
+    'trial': [1,2,3,4,5]
+}
+factor_names = [k for k in exp_factors]
+factor_lists = list(itertools.product(*exp_factors.values()))
+exp_lists = [dict(zip(factor_names, factor_l)) for factor_l in factor_lists]
+```
+:::
+
+
+::: {.cell .code}
+```python
 # get name of router interface that is 'toward' h1 - apply delay here
 # get name of router interface that is 'toward' h3 - apply rate limiting and buffer size limit here
 router_node = slice.get_node(name='tbf')
@@ -20,25 +38,6 @@ tx_node = slice.get_node(name="h1")
 rx_node = slice.get_node(name="h3")
 ```
 :::
-
-
-::: {.cell .code}
-```python
-# generate full factorial experiment
-import itertools
-exp_factors = { 
-    'bufcap': [100, 10000],
-    'bandwidth': [10, 20, 50, 100, 250, 500, 750, 1000],
-    'rtt': [5, 10, 25, 50, 75, 100, 150, 200],
-    'cc': ["cubic", "bbr"],
-    'trial': [1,2,3,4,5]
-}
-factor_names = [k for k in exp_factors]
-factor_lists = list(itertools.product(*exp_factors.values()))
-exp_lists = [dict(zip(factor_names, factor_l)) for factor_l in factor_lists]
-```
-:::
-
 
 ::: {.cell .code}
 ```python
