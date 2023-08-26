@@ -12,7 +12,7 @@ fabric-run.ipynb: $(SNIPPETS) intro.md exp-define.md exp-exec.md exp-analyze.md
 		exp-define.md \
 		$(SNIPDIR)/reserve-resources.md \
 		exp-extend.md \
-		$(SNIPDIR)/configure-resources.md  \
+		$(SNIPDIR)/configure-resources.md $(SNIPDIR)/ipv4-access-from-ipv6.md  \
 		exp-configure.md exp-validate.md \
 		$(SNIPDIR)/draw-topo-detailed-labels.md $(SNIPDIR)/log-in.md \
 		exp-exec.md exp-analyze.md \
