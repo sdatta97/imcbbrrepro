@@ -1,6 +1,6 @@
 #!/bin/bash
 ##code runs on router (tbf)
-sudo ssh -o StrictHostKeyChecking=no -T root@h1 "mkdir -p fig6"
+sudo ssh -o StrictHostKeyChecking=no -T root@h2 "mkdir -p fig6"
 for bufcap in 100 10000 
 do
     for bandwidth in 10 20 50 100 250 500 750 1000
@@ -23,13 +23,13 @@ do
                 sudo tc qdisc add dev $(ip route get 10.10.3.1 | grep -oP "(?<=dev )[^ ]+") parent 1:3 bfifo limit "$bufcap"kb
                 sleep 10
                 sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
-                sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -w 20M -C cubic -n 10mb -fk -V > ./fig6/"$bufcap"_"$bandwidth"_"$rtt"_"$trial"_cubic_10.txt"
+                sudo ssh -o StrictHostKeyChecking=no -T root@h2 "iperf3 -c h3 -w 100M -C cubic -n 10mb -fk -V > ./fig6/"$bufcap"_"$bandwidth"_"$rtt"_"$trial"_cubic_10.txt"
                 sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
-                sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -w 20M -C bbr2 -n 10mb -fk -V > ./fig6/"$bufcap"_"$bandwidth"_"$rtt"_"$trial"_bbr_10.txt"
+                sudo ssh -o StrictHostKeyChecking=no -T root@h2 "iperf3 -c h3 -w 100M -C bbr2 -n 10mb -fk -V > ./fig6/"$bufcap"_"$bandwidth"_"$rtt"_"$trial"_bbr_10.txt"
                 sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
-                sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -w 20M -C cubic -n 100mb -fk -V > ./fig6/"$bufcap"_"$bandwidth"_"$rtt"_"$trial"_cubic_100.txt"
+                sudo ssh -o StrictHostKeyChecking=no -T root@h2 "iperf3 -c h3 -w 100M -C cubic -n 100mb -fk -V > ./fig6/"$bufcap"_"$bandwidth"_"$rtt"_"$trial"_cubic_100.txt"
                 sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
-                sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -w 20M -C bbr2 -n 100mb -fk -V > ./fig6/"$bufcap"_"$bandwidth"_"$rtt"_"$trial"_bbr_100.txt"
+                sudo ssh -o StrictHostKeyChecking=no -T root@h2 "iperf3 -c h3 -w 100M -C bbr2 -n 100mb -fk -V > ./fig6/"$bufcap"_"$bandwidth"_"$rtt"_"$trial"_bbr_100.txt"
             done
         done
     done
