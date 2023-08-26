@@ -23,13 +23,13 @@ do
                 sudo tc qdisc add dev $(ip route get 10.10.3.1 | grep -oP "(?<=dev )[^ ]+") parent 1:3 bfifo limit "$bufcap"kb
                 sleep 10
                 sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
-                sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C cubic -n 10mb -fk -V > ./fig6/"$bufcap"_"$bandwidth"_"$rtt"_"$trial"_cubic_10.txt"
+                sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -w 20M -C cubic -n 10mb -fk -V > ./fig6/"$bufcap"_"$bandwidth"_"$rtt"_"$trial"_cubic_10.txt"
                 sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
-                sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C bbr2 -n 10mb -fk -V > ./fig6/"$bufcap"_"$bandwidth"_"$rtt"_"$trial"_bbr_10.txt"
+                sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -w 20M -C bbr2 -n 10mb -fk -V > ./fig6/"$bufcap"_"$bandwidth"_"$rtt"_"$trial"_bbr_10.txt"
                 sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
-                sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C cubic -n 100mb -fk -V > ./fig6/"$bufcap"_"$bandwidth"_"$rtt"_"$trial"_cubic_100.txt"
+                sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -w 20M -C cubic -n 100mb -fk -V > ./fig6/"$bufcap"_"$bandwidth"_"$rtt"_"$trial"_cubic_100.txt"
                 sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
-                sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C bbr2 -n 100mb -fk -V > ./fig6/"$bufcap"_"$bandwidth"_"$rtt"_"$trial"_bbr_100.txt"
+                sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -w 20M -C bbr2 -n 100mb -fk -V > ./fig6/"$bufcap"_"$bandwidth"_"$rtt"_"$trial"_bbr_100.txt"
             done
         done
     done
