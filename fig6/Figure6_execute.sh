@@ -10,9 +10,9 @@ do
             for trial in 1 2 3 4 5
             do 
                 ## Delete any existing queues
-                sudo tc qdisc del dev $(ip route get 10.10.1.1 | grep -oP "(?<=dev )[^ ]+") root  
+                sudo tc qdisc del dev $(ip route get 10.10.2.1 | grep -oP "(?<=dev )[^ ]+") root  
                 ## Set up network rtt 
-                sudo tc qdisc replace dev $(ip route get 10.10.1.1 | grep -oP "(?<=dev )[^ ]+") root netem delay "$rtt"ms
+                sudo tc qdisc replace dev $(ip route get 10.10.2.1 | grep -oP "(?<=dev )[^ ]+") root netem delay "$rtt"ms
                 ## Delete any existing queues
                 sudo tc qdisc del dev $(ip route get 10.10.3.1 | grep -oP "(?<=dev )[^ ]+") root
                 ## Create an htb qdisc
