@@ -12,7 +12,7 @@ do
             do
                 expstr="$bufcap,$bandwidth,$rtt"
                 bbr_tput=$(rg receiver "$bufcap"_"$bandwidth"_"$rtt"_"$trial"_bbr.txt -A 0 -m 1| awk '{print $7}') 
-                cubic_tput=$(rg receiver "$bufcap"_"$bandwidth"_"$rtt"_"$trial"_cubic.txt -A 0 | awk '{print $7}') 
+                cubic_tput=$(rg receiver "$bufcap"_"$bandwidth"_"$rtt"_"$trial"_cubic.txt -A 0 -m 1| awk '{print $7}') 
                 echo "$bbr_tput,$cubic_tput,$expstr" >> tput.csv  
                 bbr_retr=$(rg sender "$bufcap"_"$bandwidth"_"$rtt"_"$trial"_bbr.txt -A 0 -m 1| awk '{print $9}') 
                 cubic_retr=$(rg sender "$bufcap"_"$bandwidth"_"$rtt"_"$trial"_cubic.txt -A 0 -m 1| awk '{print $9}')   
