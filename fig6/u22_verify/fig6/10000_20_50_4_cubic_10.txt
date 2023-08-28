@@ -1,0 +1,21 @@
+iperf 3.9
+Linux h1.u22verifybbr.nyunetworks-pg0.utah.cloudlab.us 5.15.0-69-generic #76-Ubuntu SMP Fri Mar 17 17:19:29 UTC 2023 x86_64
+Control connection MSS 8948
+Time: Sun, 27 Aug 2023 16:53:21 GMT
+Connecting to host h3, port 5201
+      Cookie: 7bvhzcns6njq3l7kq5dkauj5n23ah6ujozex
+      TCP MSS: 8948 (default)
+[  5] local 10.10.1.1 port 34706 connected to 10.10.3.1 port 5201
+Starting Test: protocol: TCP, 1 streams, 131072 byte blocks, omitting 0 seconds, 10485760 bytes to send, tos 0
+[ ID] Interval           Transfer     Bitrate         Retr  Cwnd
+[  5]   0.00-0.05   sec  10.0 MBytes  1614809 Kbits/sec    0   87.4 KBytes       
+- - - - - - - - - - - - - - - - - - - - - - - - -
+Test Complete. Summary Results:
+[ ID] Interval           Transfer     Bitrate         Retr
+[  5]   0.00-0.05   sec  10.0 MBytes  1614809 Kbits/sec    0             sender
+[  5]   0.00-0.13   sec  64.0 KBytes  4147 Kbits/sec                  receiver
+CPU Utilization: local/sender 29.8% (5.4%u/24.4%s), remote/receiver 0.1% (0.0%u/0.1%s)
+snd_tcp_congestion cubic
+rcv_tcp_congestion cubic
+
+iperf Done.

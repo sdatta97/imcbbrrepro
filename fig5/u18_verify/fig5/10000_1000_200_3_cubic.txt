@@ -1,0 +1,77 @@
+iperf 3.1.3
+Linux h1.u18verifybbr.nyunetworks-pg0.utah.cloudlab.us 4.15.0-169-generic #177-Ubuntu SMP Thu Feb 3 10:50:38 UTC 2022 x86_64
+Time: Sun, 27 Aug 2023 14:31:14 GMT
+Connecting to host h3, port 5201
+      Cookie: h1.u18verifybbr.nyunetworks-pg0.utah
+      TCP MSS: 1448 (default)
+[  4] local 10.10.1.1 port 48620 connected to 10.10.3.1 port 5201
+Starting Test: protocol: TCP, 1 streams, 131072 byte blocks, omitting 0 seconds, 60 second test
+[ ID] Interval           Transfer     Bandwidth       Retr  Cwnd
+[  4]   0.00-1.00   sec   130 MBytes  1089051 Kbits/sec    0   17.0 KBytes       
+[  4]   1.00-2.00   sec  1.25 MBytes  10484 Kbits/sec    0   21.2 KBytes       
+[  4]   2.00-3.00   sec  1.25 MBytes  10486 Kbits/sec    0   28.3 KBytes       
+[  4]   3.00-4.00   sec  1.25 MBytes  10487 Kbits/sec    0   35.4 KBytes       
+[  4]   4.00-5.00   sec  1.25 MBytes  10486 Kbits/sec    0   62.2 KBytes       
+[  4]   5.00-6.00   sec  1.25 MBytes  10485 Kbits/sec    0    102 KBytes       
+[  4]   6.00-7.00   sec  1.25 MBytes  10485 Kbits/sec    0    163 KBytes       
+[  4]   7.00-8.00   sec  1.25 MBytes  10486 Kbits/sec    0    243 KBytes       
+[  4]   8.00-9.00   sec  1.25 MBytes  10486 Kbits/sec    0    344 KBytes       
+[  4]   9.00-10.00  sec  1.25 MBytes  10486 Kbits/sec    0    482 KBytes       
+[  4]  10.00-11.00  sec  1.25 MBytes  10487 Kbits/sec    0    648 KBytes       
+[  4]  11.00-12.00  sec  1.25 MBytes  10484 Kbits/sec    0    846 KBytes       
+[  4]  12.00-13.00  sec  2.50 MBytes  20985 Kbits/sec    0   1.07 MBytes       
+[  4]  13.00-14.00  sec  6.25 MBytes  52441 Kbits/sec    0   1.36 MBytes       
+[  4]  14.00-15.00  sec  7.50 MBytes  62914 Kbits/sec    0   1.73 MBytes       
+[  4]  15.00-16.00  sec  10.0 MBytes  83871 Kbits/sec    0   2.20 MBytes       
+[  4]  16.00-17.00  sec  12.5 MBytes  104880 Kbits/sec    0   2.81 MBytes       
+[  4]  17.00-18.00  sec  16.2 MBytes  136292 Kbits/sec    0   3.58 MBytes       
+[  4]  18.00-19.00  sec  20.0 MBytes  167787 Kbits/sec    0   4.56 MBytes       
+[  4]  19.00-20.00  sec  23.8 MBytes  199244 Kbits/sec    0   5.74 MBytes       
+[  4]  20.00-21.00  sec  30.0 MBytes  251682 Kbits/sec    0   7.19 MBytes       
+[  4]  21.00-22.00  sec  35.0 MBytes  293600 Kbits/sec    0   8.95 MBytes       
+[  4]  22.00-23.00  sec  43.8 MBytes  367007 Kbits/sec    0   11.1 MBytes       
+[  4]  23.00-24.00  sec  53.8 MBytes  450867 Kbits/sec    0   13.8 MBytes       
+[  4]  24.00-25.00  sec  65.0 MBytes  545270 Kbits/sec    0   17.0 MBytes       
+[  4]  25.00-26.00  sec  76.2 MBytes  639634 Kbits/sec    0   20.9 MBytes       
+[  4]  26.00-27.00  sec  91.2 MBytes  765369 Kbits/sec    0   25.4 MBytes       
+[  4]  27.00-28.00  sec   105 MBytes  880916 Kbits/sec    0   30.7 MBytes       
+[  4]  28.00-29.00  sec  97.5 MBytes  817896 Kbits/sec  1339   23.7 MBytes       
+[  4]  29.00-30.00  sec   135 MBytes  1132802 Kbits/sec    0   24.8 MBytes       
+[  4]  30.00-31.00  sec   114 MBytes  954101 Kbits/sec    0   25.8 MBytes       
+[  4]  31.00-32.00  sec   114 MBytes  954107 Kbits/sec    0   26.8 MBytes       
+[  4]  32.00-33.00  sec   114 MBytes  954075 Kbits/sec    0   27.6 MBytes       
+[  4]  33.00-34.00  sec   114 MBytes  954198 Kbits/sec    0   28.4 MBytes       
+[  4]  34.00-35.00  sec   114 MBytes  954202 Kbits/sec    0   29.2 MBytes       
+[  4]  35.00-36.00  sec   114 MBytes  954234 Kbits/sec    0   29.8 MBytes       
+[  4]  36.00-37.00  sec   114 MBytes  954130 Kbits/sec    0   30.4 MBytes       
+[  4]  37.00-38.00  sec   114 MBytes  954275 Kbits/sec    0   30.9 MBytes       
+[  4]  38.00-39.00  sec   114 MBytes  954199 Kbits/sec    0   31.4 MBytes       
+[  4]  39.00-40.00  sec   114 MBytes  954194 Kbits/sec    0   31.9 MBytes       
+[  4]  40.00-41.00  sec  98.8 MBytes  828323 Kbits/sec   37   27.6 MBytes       
+[  4]  41.00-42.00  sec   128 MBytes  1069547 Kbits/sec   39   23.0 MBytes       
+[  4]  42.00-43.00  sec   112 MBytes  943809 Kbits/sec    0   23.6 MBytes       
+[  4]  43.00-44.00  sec   114 MBytes  954192 Kbits/sec    0   24.2 MBytes       
+[  4]  44.00-45.00  sec   114 MBytes  954231 Kbits/sec    0   24.7 MBytes       
+[  4]  45.00-46.00  sec   114 MBytes  954210 Kbits/sec    0   25.1 MBytes       
+[  4]  46.00-47.00  sec   114 MBytes  954153 Kbits/sec    0   25.5 MBytes       
+[  4]  47.00-48.00  sec   114 MBytes  954200 Kbits/sec    0   25.8 MBytes       
+[  4]  48.00-49.00  sec   114 MBytes  954196 Kbits/sec    0   26.1 MBytes       
+[  4]  49.00-50.00  sec   114 MBytes  954253 Kbits/sec    0   26.4 MBytes       
+[  4]  50.00-51.00  sec   114 MBytes  954204 Kbits/sec    0   26.6 MBytes       
+[  4]  51.00-52.00  sec   114 MBytes  954214 Kbits/sec    0   26.8 MBytes       
+[  4]  52.00-53.00  sec   114 MBytes  954201 Kbits/sec    0   27.0 MBytes       
+[  4]  53.00-54.00  sec   114 MBytes  954149 Kbits/sec    0   27.1 MBytes       
+[  4]  54.00-55.00  sec   114 MBytes  954205 Kbits/sec    0   27.2 MBytes       
+[  4]  55.00-56.00  sec   114 MBytes  954212 Kbits/sec    0   27.2 MBytes       
+[  4]  56.00-57.00  sec   114 MBytes  954081 Kbits/sec    0   27.3 MBytes       
+[  4]  57.00-58.00  sec   114 MBytes  954238 Kbits/sec    0   27.3 MBytes       
+[  4]  58.00-59.00  sec   114 MBytes  954327 Kbits/sec    0   27.3 MBytes       
+[  4]  59.00-60.00  sec   114 MBytes  954109 Kbits/sec    0   27.3 MBytes       
+- - - - - - - - - - - - - - - - - - - - - - - - -
+Test Complete. Summary Results:
+[ ID] Interval           Transfer     Bandwidth       Retr
+[  4]   0.00-60.00  sec  4.28 GBytes  613061 Kbits/sec  1415             sender
+[  4]   0.00-60.00  sec  4.18 GBytes  598282 Kbits/sec                  receiver
+CPU Utilization: local/sender 3.5% (0.4%u/3.2%s), remote/receiver 37.1% (7.7%u/29.4%s)
+
+iperf Done.
