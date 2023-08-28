@@ -51,6 +51,7 @@ tx_node.execute("mkdir -p " + data_dir)
 
 ::: {.cell .code}
 ```python
+import time # to allow resume
 for exp in exp_lists:
 
     # check if we already ran this experiment
@@ -65,6 +66,7 @@ for exp in exp_lists:
         print("Running experiment to generate " + file_out)
 
         tx_node.execute("sudo modprobe tcp_" + exp['cc'])
+        rx_node.execute("sudo modprobe tcp_" + exp['cc']) # iperf3 on ubuntu 18.04 requires this if using BBR and setting window size..
 
         router_node.execute("sudo tc qdisc del dev " + router_ingress_name + " root")
         router_node.execute("sudo tc qdisc del dev " + router_egress_name + " root")
