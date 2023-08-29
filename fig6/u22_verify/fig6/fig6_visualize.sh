@@ -11,8 +11,8 @@ do
             for trial in 1 2 3 4 5
             do
                 expstr="$bufcap,$bandwidth,$rtt"
-                bbr_latency=$(rg sender "$bufcap"_"$bandwidth"_"$rtt"_"$trial"_bbr_100.txt -A 0 | awk '{print $3}' | cut -d "-" -f 2)
-                cubic_latency=$(rg sender "$bufcap"_"$bandwidth"_"$rtt"_"$trial"_cubic_100.txt -A 0 | awk '{print $3}' | cut -d "-" -f 2)
+                bbr_latency=$(rg sender "$bufcap"_"$bandwidth"_"$rtt"_"$trial"_bbr_100.txt -A 0 -m 1| awk '{print $3}' | cut -d "-" -f 2)
+                cubic_latency=$(rg sender "$bufcap"_"$bandwidth"_"$rtt"_"$trial"_cubic_100.txt -A 0 -m 1| awk '{print $3}' | cut -d "-" -f 2)
                 echo "$bbr_latency,$cubic_latency,$expstr" >> latency.csv
             done      
         done
