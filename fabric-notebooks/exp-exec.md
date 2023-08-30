@@ -72,7 +72,7 @@ for exp in exp_lists:
         router_node.execute("sudo tc qdisc del dev " + router_egress_name + " root")
 
         # set up RTT
-        router_node.execute("sudo tc qdisc replace dev " + router_ingress_name + " root netem delay " + str(exp['rtt']) + "ms")
+        router_node.execute("sudo tc qdisc replace dev " + router_ingress_name + " root netem delay " + str(exp['rtt']) + "ms limit 10000")
         # set up rate limit, buffer limit
         router_node.execute("sudo tc qdisc replace dev " + router_egress_name + " root handle 1: htb default 3")
         router_node.execute("sudo tc class add dev " + router_egress_name + " parent 1: classid 1:3 htb rate " + str(exp['bandwidth']) + "Mbit")
