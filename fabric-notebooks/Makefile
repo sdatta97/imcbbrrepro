@@ -16,6 +16,6 @@ fabric-run.ipynb: $(SNIPPETS) intro.md exp-define.md exp-exec.md exp-analyze.md
 		$(SNIPDIR)/configure-resources.md  \
 		exp-validate.md \
 		$(SNIPDIR)/draw-topo-detailed-labels.md $(SNIPDIR)/log-in.md \
-		exp-exec.md exp-analyze.md \
+		exp-exec.md exp-analyze.md exp-transfer.md \
 		$(SNIPDIR)/delete-slice.md \
 		-o fabric-run.ipynb  
