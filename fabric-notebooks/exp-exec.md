@@ -80,7 +80,7 @@ for exp in exp_lists:
 
         time.sleep(10)
         rx_node.execute("iperf3 -s -1 -D")
-        tx_node.execute("iperf3 -V -c h3 -C " + exp['cc'] + " -t 60s -fk -w 20M --logfile " + file_out, quiet=True)
+        tx_node.execute("iperf3 -V -c h3 -C " + exp['cc'] + " -t 60s -fk -w 100M --logfile " + file_out, quiet=True)
 ```
 :::
 
