@@ -25,7 +25,7 @@ cleanup ()
 	cwn=$(cat sender-ss.txt |   sed -e ':a; /<->$/ { N; s/<->\n//; ba; }' | grep "ESTAB"    |  grep "unacked" | grep -oP '\bcwnd:.*(\s|$)\bbytes_acked' | awk -F '[: ]' '{print $2","$4}')
 
 	# concatenate into one CSV
-	paste -d ',' <(printf %s "$ts") <(printf %s "$sender") <(printf %s "$retr") <(printf %s "$cwn") > sender-ss.csv
+	paste -d ',' <(printf %s "$ts") <(printf %s "$send_q") <(printf %s "$sender") <(printf %s "$retr") <(printf %s "$cwn") > sender-ss.csv
 
 	exit 0
 }
