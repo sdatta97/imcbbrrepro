@@ -1,2 +1,3 @@
 #!/bin/bash
-cat foo.txt | grep "qdisc" |  awk '{print $1, $30}' | tr -d b >> backlogs.csv
+cat foo.txt | grep "htb" |  awk '{print $1}' >> timestamps.csv
+cat foo.txt | grep "backlog" |  awk '{print $2}' | sed 's/.$//' >> backlogs.csv
