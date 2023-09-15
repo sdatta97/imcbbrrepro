@@ -1,11 +1,11 @@
 #!/bin/bash
 ##code runs on router (tbf)
 sudo ssh -o StrictHostKeyChecking=no -T root@h1 "mkdir -p fig5"
-for bufcap in 100 
+for bufcap in 10000
 do
-    for bandwidth in 1000 
+    for bandwidth in 10
     do
-        for rtt in 200 
+        for rtt in 5
         do
             for trial_idx in 1 2 3 4 5
             do 
@@ -24,9 +24,9 @@ do
                 sleep 10
                 sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
                 sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C cubic -w 100M -t 60s -fk -V > ./fig5/"$bufcap"_"$bandwidth"_"$rtt"_"$trial_idx"_cubic.txt"
-                sleep 10
-                sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
-                sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C bbr2 -w 100M -t 60s -fk -V > ./fig5/"$bufcap"_"$bandwidth"_"$rtt"_"$trial_idx"_bbr.txt"
+                ##sleep 10
+                ##sudo ssh -o StrictHostKeyChecking=no -T root@h3 "iperf3 -s -1 -D"
+                ##sudo ssh -o StrictHostKeyChecking=no -T root@h1 "iperf3 -c h3 -C bbr2 -w 100M -t 60s -fk -V > ./fig5/"$bufcap"_"$bandwidth"_"$rtt"_"$trial_idx"_bbr.txt"
             done
         done
     done
