@@ -12,9 +12,9 @@ git clone -o google-bbr -b v2alpha  https://github.com/google/bbr.git
 cd bbr/
 
 Install pre-requisites
-sudo apt update; sudo apt -y install libelf-dev libssl-dev libncurses-dev 
-flex bison pkg-config gcc
-sudo apt-get -y install binutils ca-certificates
+sudo apt update
+sudo apt -y install libelf-dev libssl-dev libncurses-dev 
+flex bison pkg-config gcc binutils ca-certificates
 
 Configuration steps
 sudo make menuconfig # select advanced TCP congestion control -> BBRv2, save it as .config
@@ -29,7 +29,7 @@ CONFIG_DEBUG_INFO_BTF=n
 
 Make and Install
 sudo make -j $(nproc)
-sudo make modules -j $(nproc)
+sudo make modules INSTALL_MOD_STRIP=1 -j $(nproc)
 sudo make modules_install -j $(nproc)
 sudo make install -j $(nproc)
 

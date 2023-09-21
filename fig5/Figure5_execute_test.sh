@@ -7,7 +7,7 @@ do
     do
         for rtt in 5
         do
-            for trial_idx in 1 2 3 4 5
+            for trial_idx in 1
             do 
                 ## Delete any existing queues
                 sudo tc qdisc del dev $(ip route get 10.10.1.1 | grep -oP "(?<=dev )[^ ]+") root  
