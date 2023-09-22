@@ -32,3 +32,7 @@ You can use the materials in this repository to recreate our experiment on the [
 Select the Ubuntu 18.04 disk image to reproduce our replication, or the Ubuntu 20.04 disk image to reproduce our extension to BBRv2. Then, continue to reserve resources and start your experiment on any cluster.
 
 Once your resources are reserved and active, you can SSH into each of the nodes and run experiments using the instructions provided inside the `cloudlab-materials` directory.
+
+--- 
+
+This material is based upon work supported by the National Science Foundation under Grant No. 2226408. Any opinions, findings, and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the National Science Foundation.
