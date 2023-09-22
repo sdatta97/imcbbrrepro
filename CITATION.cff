@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "Datta"
+  given-names: "Soumyadeep"
+  orcid: "https://orcid.org/0000-0003-1631-9991"
+- family-names: "Fund"
+  given-names: "Fraida"
+  orcid: "https://orcid.org/0000-0002-9897-9282"
+title: "Artifaces for Replication: When to Use and When Not to Use BBR"
+version: 1.0.0
+date-released: 2023-09-22
+url: "https://github.com/sdatta97/imcbbrrepro"
+preferred-citation:
+  type: conference-paper
+  authors:
+  - family-names: "Datta"
+    given-names: "Soumyadeep"
+    orcid: "https://orcid.org/0000-0003-1631-9991"
+  - family-names: "Fund"
+    given-names: "Fraida"
+    orcid: "https://orcid.org/0000-0002-9897-9282"
+  doi: "10.1145/3618257.3624837"
+  title: "Replication: When to Use and When Not to Use BBR"
+  booktitle: "Proceedings of the Internet Measurement Conference"
+  series: "IMC '23"
+  publisher: "Association for Computing Machinery"
+  location: "Montreal, QC, Canada"
+  year: 2023
+
