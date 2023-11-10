@@ -4,12 +4,12 @@
 
 ::: {.cell .code}
 ```python
-# if you need to install BBR2 kernel, make this True
-is_bbr2 = False
-pkg_list = ['linux-headers-5.13.12_5.13.12-2_amd64.deb',
-            'linux-libc-dev_5.13.12-2_amd64.deb',
-            'linux-image-5.13.12_5.13.12-2_amd64.deb']
-if is_bbr2:
+# if you need to install BBR3 kernel, make this True
+is_bbr3 = True
+pkg_list = ['linux-headers-6.4.0+_6.4.0-g6e321d1c986a-5_amd64.deb',
+            'linux-libc-dev_6.4.0-g6e321d1c986a-5_amd64.deb',
+            'linux-image-6.4.0+_6.4.0-g6e321d1c986a-5_amd64.deb']
+if is_bbr3:
     for node in slice.get_nodes():
         for pkg in pkg_list:
             node.upload_file("../setup/" + pkg, "/home/ubuntu/" + pkg)
